@@ -1,12 +1,12 @@
-define(['angular', 'couch-potato', 'ui-router'], function () {
+define([
+    'angular', 
+    'couch-potato', 
+    'ui-router'
+], 
+function () {
     'use strict';
-    
-    //this should be an angular module 
-    var App = {
-        init: function () {
-            console.log('App is running');
-        }
-    };
-    
-    return App;
+        
+    var app = angular.module('app', ['ui-router', 'couch-potato']);
+    console.log('App is loaded');
+    return app;
 });
