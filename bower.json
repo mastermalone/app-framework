@@ -1,0 +1,27 @@
+{
+  "name": "server-work",
+  "main": "index.js",
+  "version": "0.0.0",
+  "description": "Node Server",
+  "keywords": [
+    "Node",
+    "Server"
+  ],
+  "authors": [
+    "mastermalone"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.4.6",
+    "requirejs": "~2.1.20",
+    "couch-potato": "~0.1.0",
+    "angular-ui-router": "~0.2.15"
+  }
+}

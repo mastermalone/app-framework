@@ -1,0 +1,21 @@
+{
+  "name": "server-work",
+  "version": "1.0.0",
+  "description": "Node Server",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo the test works",
+    "server": "node start-server.js"
+  },
+  "keywords": [
+    "Node",
+    "server"
+  ],
+  "author": "mastermalone",
+  "license": "ISC",
+  "devDependencies": {
+    "connect": "^3.4.0",
+    "serve-static": "^1.10.0",
+    "vhost": "^3.0.1"
+  }
+}
