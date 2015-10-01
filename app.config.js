@@ -2,27 +2,27 @@ require.config({
     urlArgs: 'bust='+(new Date().getTime()),
     baseUrl: '/',
     paths: {
-        'angular': 'lib/angular.min',
+        'angular': 'lib/angular',
+        'couch-potato': 'lib/couch-potato',
         'ui-router': 'lib/angular-ui-router.min',
-        'couch-potato': 'lib/couch-potato.min',
-        'app': 'app/app'
+        'app': 'app/app',
+        'app-init': 'app/app-init'
     },
     shims: {
         'angular': {
             exports: 'angular'
         },
         'couch-potato': {
-            deps: 'angular',
+            deps: ['angular'],
             exports: 'couch-potato'
         },
         'ui-router': {
             deps: 'angular',
-            exports: 'angular-ui-router'
+            exports: 'ui-router'
         }
     }
 });
 
-require(['app'], function () {
-    //app.init();
+require(['app-init'], function () {
     console.log('App config is loaded');
 });
