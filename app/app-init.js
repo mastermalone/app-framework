@@ -1,18 +1,11 @@
-require.config({
-    baseUrl: '/',
-    paths: {
-        'app': 'app/app',
-        'couch-potato': 'lib/angular-couch-potato'
-    } 
-    
-});
-
-define(['app'], function (app) {
-    console.log('Preparing to initialize');
-    
-        
-    app.run(['$couchPotato'], function ($couchPotato) {
+//Loads up app
+define(['app', 'app-config'], function (app) {
+   'use strict';
+   
+    app.run(['$couchPotato', function ($couchPotato) {
         app.lazy = $couchPotato;
         console.log('LAZY', app.lazy);
-    });
+    }]);
+    
+    console.log('Preparing to initialize', app);
 });
