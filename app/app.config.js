@@ -4,12 +4,16 @@ define(['app', 'app-routes'], function (app) {
     //This should probably call app.routes
     app.config(function ($stateProvider, $urlRouterProvider) {
         $urlRouterProvider.otherwise('/main');
-        
+        console.log('Value of stateprovider:');
         $stateProvider
-            .state('main', {
+            /*.state('main', {
                 url: '/main',
                 templateUrl: 'states/main/index.html',
                 controller: 'appController'
+            })*/
+            .state('main', {
+                url: '/main',
+                templateUrl: 'states/main/index.html'
             })
             .state('home', {
                 url: '/home',
@@ -22,5 +26,5 @@ define(['app', 'app-routes'], function (app) {
             
     });
     
-    console.log('app.config is called.');
+    //console.log('app.config is called.');
 });
