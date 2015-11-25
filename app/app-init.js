@@ -1,6 +1,4 @@
 //Loads up app
-
-
 define(['app', 'app-config'], function (app) {
    'use strict';
     //Gets the app running with all the dependencies in place
@@ -12,13 +10,9 @@ define(['app', 'app-config'], function (app) {
         console.log('LAZY', app.lazy);
         console.log('Value opf $stateParams:', $stateParams);
         
-        
         $rootScope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState, fromParams) {
-            $rootScope.toState = toState;    
-            appState = toState;        
+            $rootScope.toState = toState; 
             console.log($rootScope.toState.name);
         });
     }]);
 });
-
-var appState;

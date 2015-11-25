@@ -6,7 +6,5 @@ require.config({
 });
 
 require(['app', 'main'], function (app) {
-    console.log('loading main page', appState);
-    
-    
+    console.log('loading main page');
 });

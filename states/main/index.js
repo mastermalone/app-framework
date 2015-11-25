@@ -1,15 +1,15 @@
 require.config({
     paths: {
         'app': './app/app',
-        'main': './states/main/index',
-        'tout': './js/modules/tout-directive/index'
+        'tout': './js/modules/tout-directive/index',
+        'get-state-service': './js/get-state-service/index' 
     } 
 });
 
-define(['app', 'main', 'tout'], function (app) {
+define(['app', 'get-state-service', 'tout'], function (app, getState) {
     'use strict';
     
-    console.log('From main/index.js');
+    console.log('From main/index.js', getState);
     
     
     app.registerDirective('mainDirective', [function () {
@@ -27,6 +27,7 @@ define(['app', 'main', 'tout'], function (app) {
     
     app.registerController('mainController', ['$scope', function ($scope) {
         //Main Page controller
+        //var gs = getState($rootScope);
         $scope.hello = "This is BS";
         this.data = {
             hello: 'Hello from the New object litteral',
