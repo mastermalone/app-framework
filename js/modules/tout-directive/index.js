@@ -1,11 +1,12 @@
 require.config({
     paths: {
-        //'http': 'path/to/http'
+        //'http': 'path/to/http',
+        //'template': 'tout-directive/index.html'
     }
 });
 
 
-define(['app'], function (PP) {
+define(['app'], function (app) {
     'use strict';
     console.log('Value of app', app);
     
@@ -14,11 +15,12 @@ define(['app'], function (PP) {
             restrict: 'AE',
             scope: {
                 test: '=',
-                event: '@'
+                event: '@',
+                name: '@'
             },
-            templateUrl: 'index.html',
+            templateUrl: './js/modules/tout-directive/index.html',
             link: function (scope, element, attrs) {
-                console.log('The directive is loading');
+                console.log('The Tout directive is loading');
             }
         };
     }]);

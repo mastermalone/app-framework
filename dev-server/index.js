@@ -3,6 +3,8 @@ module.exports.server = (function () {
     
     var Server = {
         init: function (port) {
+            port = port || 3000;
+            
             var connect = require('connect');
             var svStatic = require('serve-static');
             var vhost = require('vhost');
@@ -16,13 +18,8 @@ module.exports.server = (function () {
             mainApp.use(vhost('localhost', siteApp));
             
             //app.use(vhost('member.localhost.cn', siteApp));
-            
-            if (typeof port !== 'undefined') {
-                mainApp.listen(port);
-                console.log('Listening on port:', port);
-            }else {
-                return;
-            }
+            mainApp.listen(port);
+            console.log("Server is listening on port:", port);
         }
     };
     

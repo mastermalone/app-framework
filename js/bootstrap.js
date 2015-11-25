@@ -1,10 +1,12 @@
 require.config({
     paths: {
-        'tout': 'path/to/tout/index'
+        'app': '../app/app',
+        'main': '../states/main/index'
     }
 });
 
-
-reqire([], function () {
-    console.log('loading main page');
+require(['app', 'main'], function (app) {
+    console.log('loading main page', appState);
+    
+    
 });
