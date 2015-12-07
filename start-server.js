@@ -3,7 +3,7 @@
     
     var server = require('./dev-server/index').server;
     
-    server.init(4000);
+    server.init('localhost', 4000);
     
 }());
 

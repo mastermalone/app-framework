@@ -2,12 +2,12 @@
 require.config({
     baseUrl: './',
     paths: {
-        'app': 'app/app',
         'bootstrap': 'app/app.bootstrap',
-        'projectBootstrap': 'js/bootstrap'
+        'projectBootstrap': 'js/bootstrap',
+        'text': 'lib/text'
     }
 });
 
-require(['bootstrap', 'projectBootstrap'], function () {
+require(['bootstrap', 'projectBootstrap', 'text'], function () {
    //init app 
 });

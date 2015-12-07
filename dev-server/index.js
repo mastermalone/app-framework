@@ -2,8 +2,9 @@ module.exports.server = (function () {
     'use strict';
     
     var Server = {
-        init: function (port) {
-            port = port || 3000;
+        init: function (domain, port) {
+            var portX = port || 3000;
+            var domainX = domain || 'localhost';
             
             var connect = require('connect');
             var svStatic = require('serve-static');
@@ -15,10 +16,10 @@ module.exports.server = (function () {
             var mainApp = connect();
             
             siteApp.use(svStatic('./', {index:['index.html']}));
-            mainApp.use(vhost('localhost', siteApp));
+            mainApp.use(vhost(domainX, siteApp));
             
             //app.use(vhost('member.localhost.cn', siteApp));
-            mainApp.listen(port);
+            mainApp.listen(portX);
             console.log("Server is listening on port:", port);
         }
     };

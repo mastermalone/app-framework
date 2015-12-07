@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo the test works",
-    "server": "node start-server.js"
+    "start": "node start-server.js"
   },
   "keywords": [
     "Node",
@@ -15,6 +15,7 @@
   "license": "ISC",
   "devDependencies": {
     "connect": "^3.4.0",
+    "requirejs-text": "^2.0.12",
     "serve-static": "^1.10.0",
     "vhost": "^3.0.1"
   }

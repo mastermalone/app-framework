@@ -9,7 +9,7 @@ require.config({
         'app-config': 'app/app.config',
         'app-init': 'app/app-init',
         'app-routes': 'app/app.routes',
-        'domready': 'lib/domReady'
+        'domready': 'lib/domReady'        
     },
     shim: {
         'angular': {
