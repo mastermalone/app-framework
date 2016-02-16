@@ -7,12 +7,12 @@ define(['app', 'app-config'], function (app) {
         $rootScope.stateParames = $stateParams;
         app.lazy = $couchPotato;
         
-        console.log('LAZY', app.lazy);
-        console.log('Value opf $stateParams:', $stateParams);
+        //console.log('LAZY Loads 7th', app.lazy);
+        console.log('Value opf $stateParams:oads 7th', $stateParams);
         
         $rootScope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState, fromParams) {
             $rootScope.toState = toState; 
-            console.log($rootScope.toState.name);
+            console.log('Loads 9th', $rootScope.toState.name);
         });
     }]);
 });

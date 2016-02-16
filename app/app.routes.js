@@ -1,6 +1,6 @@
 define(['app'], function (app) {
     'use strict';
-    console.log('Getting route information');
+    console.log('Getting route informationL loads 5th');
     /*app.routeProvider(
         'routeProvider', 
         [

@@ -9,7 +9,7 @@ require.config({
 define(['app', 'get-state-service', 'tout'], function (app, getState) {
     'use strict';
     
-    console.log('From main/index.js', getState);
+    console.log('From main/index.js: loaded 3rd, since this is the main page.', getState);
     
     
     app.registerDirective('mainDirective', [function () {

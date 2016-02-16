@@ -7,7 +7,7 @@ require.config({
         'text': 'lib/text'
     }
 });
-
+console.log('Main is loading:  Loaded 1st');
 require(['bootstrap', 'projectBootstrap', 'text'], function () {
    //init app 
 });

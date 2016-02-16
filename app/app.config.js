@@ -2,9 +2,9 @@ define(['app', 'app-routes'], function (app) {
     'use strict';
     
     //This should probably call app.routes
-    app.config(function ($stateProvider, $urlRouterProvider) {
+    app.config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
         $urlRouterProvider.otherwise('/main');
-        console.log('Value of stateprovider:');
+        console.log('Value of stateprovider: loads 6th');
         $stateProvider
             /*.state('main', {
                 url: '/main',
@@ -23,8 +23,6 @@ define(['app', 'app-routes'], function (app) {
                 url: '/about',
                 templateUrl: 'states/about/index.html'
             });
-            
+        //$locationProvider.html5Mode(true);
     });
-    
-    //console.log('app.config is called.');
 });

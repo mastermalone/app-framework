@@ -33,6 +33,6 @@ require(['domready','app-init'], function (domready) {
     domready(function(){
         angular.element(document).find('html').attr('ng-app', 'app');
         angular.bootstrap(document, ['app']);
-        console.log('DOM ready, app.bootstrap');
+        console.log('DOM ready, app.bootstrap: Loads 8th');
     });
 });
