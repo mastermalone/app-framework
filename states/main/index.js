@@ -2,11 +2,12 @@ require.config({
     paths: {
         'app': './app/app',
         'tout': './js/modules/tout-directive/index',
-        'get-state-service': './js/get-state-service/index' 
+        'get-state-service': './js/get-state-service/index',
+        'auto': './js/auto-complete/index' 
     } 
 });
 
-define(['app', 'get-state-service', 'tout'], function (app, getState) {
+define(['app', 'get-state-service', 'tout', 'auto'], function (app, getState) {
     'use strict';
     
     console.log('From main/index.js: loaded 3rd, since this is the main page.', getState);
