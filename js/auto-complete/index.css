@@ -1,0 +1,20 @@
+#autocomplete {
+	font-family: 'Arial';
+	font-size:14px;
+}
+#autocomplete>input {
+	border-radius: 5px;
+	padding:7px;
+	border:solid 1px #333333;
+	width:300px;
+}
+
+#autocomplete>a {
+	border-radius: 5px;
+	padding:5px;
+	border:solid 1px #333333;
+	color: #fff;
+	background: #ff0000;
+	box-shadow: 0px 1px 3px #333333;
+	cursor: pointer;
+}
