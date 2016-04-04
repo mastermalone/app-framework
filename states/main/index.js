@@ -5,11 +5,20 @@ require.config({
         'get-state-service': './js/get-state-service/index',
         'auto': './js/auto-complete/index',
         'promise-factory': './js/promise-service/index',
-        's-pannel': './js/side-pannel/0.1/index' 
+        's-pannel': './js/side-pannel/0.1/index',
+        'slide-table': './js/slide-table/0.1/index' 
     } 
 });
 
-define(['app', 'get-state-service', 'promise-factory', 'tout', 'auto', 's-pannel'], function (app, getState, promiseFactory) {
+define([
+	'app', 
+	'get-state-service', 
+	'promise-factory', 
+	'tout', 
+	'auto', 
+	's-pannel', 
+	'slide-table'], 
+	function (app, getState, promiseFactory) {
     'use strict';
     
     console.log('From main/index.js: loaded 3rd, since this is the main page.');

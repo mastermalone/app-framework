@@ -5,32 +5,48 @@ require.config({
   }
 });
 
-define(['app'], function (app) {
+define(['app', 'text!slide-html', 'text!slide-css'], function (app, slidehtml, slidecss) {
   'use strict';
   
-  app.registerDirective('slideTable', [function (scop, element, attrs) {
+  app.registerDirective('slideTable', [function (scope, element, attrs) {
     return {
       restrict: 'EA',
-      scope: {},
-      conroller: 'SlideTableController',
-      conreollerAs: 'stCtrl',
+      scope: {
+      	css: '@',
+      	model: '@'
+      },
+      controller: 'SlideTableController',
+      controllerAs: 'stCtrl',
       bindToController: true,
+      template: slidehtml,
+      transclude: true,
       compile: function () {
         return {
-          pre: function () {
-            
+          pre: function (scope, element, attrs) {
+            console.log('VALUE OF SLIDE TABLE Element PRE', scope);
           },
-          post: function () {
-            
+          post: function (scope, element, attrs) {
+            console.log('VALUE OF SLIDE TABLE Element', scope);
           }
         };
       }
     };
   }]);
   
-  app.registerController('SlideTableController', ['$scope', function () {
+  app.registerController('SlideTableController', [
+  '$scope', 
+  '$compile', 
+  '$element',
+  function ($scope, $compile, $element) {
     var _this = this;
+    var style = '<style type="text/css", rel="stylesheet" scoped>'+ slidecss +'</style>';
     
+    //Compile the stylesheet into a usable DOM element and append it to the template
+    $element.append($compile(style)($scope));
+    
+    this.fontcolor = '#ff0000';
+    
+    console.log('Here is your SLIDE TABLE');
     _this.defaults = {
       
     };
