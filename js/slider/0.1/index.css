@@ -1,11 +1,46 @@
 #slider {
 	/*width: 600px;*/
-	border:solid 1px #CCCCCC;
+	/*border:solid 1px #CCCCCC;*/
+	overflow: hidden;
 }
 #slider ul li {
 	display: inline-block;
 	float:left;
+	margin:0px;
+	padding:0px;
 }
-#slider>#controls>.left,  #slider>#controls>.right {
-	display: inline-block;
+#slider>#controls {
+	overflow: hidden;
+	margin:0px;
+	padding: 0px;
+}
+#slider>#controls>#slide-content {
+	width:78%;
+}
+
+#slider>#controls>#slide-content>ul {
+	overflow:hidden;
+	margin:0px auto;
+	border:solid 1px #cccccc;
+}
+#slider>#controls>.left, #slider>#controls>.right {
+	cursor:pointer
+}
+#slider>#controls>.right {
+	float: right;
+}
+
+#slider>#controls>.left {
+	width: 0;
+	height: 0;
+	border-style: solid;
+	border-width: 30px 60px 30px 0;
+	border-color: transparent #666666 transparent transparent;
+}
+#slider>#controls>.right {
+	width: 0;
+	height: 0;
+	border-style: solid;
+	border-width: 30px 0 30px 60px;
+	border-color: transparent transparent transparent #666666;
 }
