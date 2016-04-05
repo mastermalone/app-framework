@@ -6,7 +6,8 @@ require.config({
         'auto': './js/auto-complete/index',
         //'promise-factory': './js/promise-service/index',
         's-pannel': './js/side-pannel/0.1/index',
-        'slide-table': './js/slide-table/0.1/index' 
+        'slide-table': './js/slide-table/0.1/index', 
+        'slider': './js/slider/0.1/index', 
     } 
 });
 
@@ -17,7 +18,8 @@ define([
 	'tout', 
 	'auto', 
 	's-pannel', 
-	'slide-table'], 
+	'slide-table',
+	'slider'], 
 	//function (app, getState, promiseFactory) {
 	function (app, getState) {
     'use strict';
@@ -25,7 +27,7 @@ define([
     console.log('From main/index.js: loaded 3rd, since this is the main page.');
     
     
-    app.registerDirective('mainDirective', [function () {
+    /*app.registerDirective('mainDirective', [function () {
         return {
             restrict: 'AE',
             scope: {},
@@ -38,38 +40,23 @@ define([
                 ctrl.orderMethods();
             }
         };
-    }]);
+    }]);*/
     
     //app.registerController('mainController', ['$scope', 'promiseFactory', function ($scope, promiseFactory) {
     app.registerController('mainController', ['$scope', function ($scope) {
         //Main Page controller
+        this.pageTitle = 'Custom Directives';
         
         this.orderMethods = function () {
             //promiseFactory.init(this.method1).then(this.method2);
         };
         
         this.method1 = function (resolve, reject) {
-            //var frag = document.createDocumentFragment();
-            //var bdy = document.getElementsByTagName('body')[0];
             console.log('Method 1');
-            
-            /*for (var i = 0; i < 500; i++) {
-                var p = document.createElement('p');
-                p.innerHTML = 'p tag: '+i;
-                frag.appendChild(p);
-            }
-            bdy.appendChild(frag);*/
         };
         
         this.method2 = function (resolve, reject) {
             console.log('Method 2');
         };
-        
-        $scope.hello = "This is BS";
-        this.data = {
-            hello: 'Hello from the New object litteral',
-            other: 'The other message from the object litteral From MAIN CTRL'
-        };
-        console.log('value of this:', this.data);
     }]);
 });

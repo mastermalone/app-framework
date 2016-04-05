@@ -18,5 +18,8 @@
     "requirejs-text": "^2.0.12",
     "serve-static": "^1.10.0",
     "vhost": "^3.0.1"
+  },
+  "dependencies": {
+    "eventemitter2": "~1.0.0"
   }
 }

@@ -1,0 +1,11 @@
+#slider {
+	/*width: 600px;*/
+	border:solid 1px #CCCCCC;
+}
+#slider ul li {
+	display: inline-block;
+	float:left;
+}
+#slider>#controls>.left,  #slider>#controls>.right {
+	display: inline-block;
+}

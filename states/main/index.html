@@ -1,12 +1,14 @@
-<div>
-    <div>Main Page</div>    
+<div ng-controller="mainController as mainCtrl">
+    <div>{{mainCtrl.pageTitle}}</div>    
 </div>
 
 <!-- <div page-tout name="Directive attribute: name" master="malone"></div> -->
-<div main-directive></div>
+<!--<div main-directive></div>-->
 <!-- <div page-tout>{{pgtCtrl.master}}</div> -->
 <!-- <auto-text list=""></auto-text>
 <side-pannel placement="top"></side-pannel> -->
+
 <slide-table api="./webservicemocks/event-data/0.1/index.json">
+<slider></slider>
 	<input type="button" value="Click me" />
 </slide-table>

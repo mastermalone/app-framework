@@ -10,9 +10,10 @@ define([
   'app',
   'text!slide-html', 
   'text!slide-css',
-  'slide-table-service', 
+  'emitter',
+  'slide-table-service'
   ], 
-  function (app, slidehtml, slidecss) {
+  function (app, slidehtml, slidecss, emitter) {
   'use strict';
   
   app.registerDirective('slideTable', [function (scope, element, attrs) {
@@ -55,7 +56,7 @@ define([
     var style = '<style type="text/css", rel="stylesheet" scoped>'+ slidecss +'</style>';
     var apiURL = _this.api || './webservicemocks/event-data/0.1/index.json';
     
-    //Compile the stylesheet into a usable DOM element and append it to the template
+    //Compile the stylesheet into a usable DOM element and append it to the directive element
     $element.append($compile(style)($scope));
     
     _this.fontcolor = '#ff0000';
