@@ -1,8 +1,14 @@
 #slide-table {
+	font-family: 'Arial';
+	font-size:18px;
 	width: 300px;
 	height:400px;
 	border:solid 1px #e1e1e1;
 	box-shadow: 0px 3px 5px #cccccc;
 	border-radius: 0px 0px 10px 10px;
 	color: {{stCtrl.fontcolor}};/*Gets color from Directive scope*/
+}
+
+#slide-table .description {
+	padding:20px;
 }

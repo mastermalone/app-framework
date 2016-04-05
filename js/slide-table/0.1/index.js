@@ -1,11 +1,18 @@
 require.config({
   paths: {
+    'slide-table-service': './js/slide-table/0.1/slide-table-service/0.1/index',
     'slide-html': './js/slide-table/0.1/index.html',
-    'slide-css': './js/slide-table/0.1/index.css',
+    'slide-css': './js/slide-table/0.1/index.css'
   }
 });
 
-define(['app', 'text!slide-html', 'text!slide-css'], function (app, slidehtml, slidecss) {
+define([
+  'app',
+  'text!slide-html', 
+  'text!slide-css',
+  'slide-table-service', 
+  ], 
+  function (app, slidehtml, slidecss) {
   'use strict';
   
   app.registerDirective('slideTable', [function (scope, element, attrs) {
@@ -13,7 +20,7 @@ define(['app', 'text!slide-html', 'text!slide-css'], function (app, slidehtml, s
       restrict: 'EA',
       scope: {
       	css: '@',
-      	model: '@'
+      	api: '@'
       },
       controller: 'SlideTableController',
       controllerAs: 'stCtrl',
@@ -22,11 +29,16 @@ define(['app', 'text!slide-html', 'text!slide-css'], function (app, slidehtml, s
       transclude: true,
       compile: function () {
         return {
-          pre: function (scope, element, attrs) {
-            console.log('VALUE OF SLIDE TABLE Element PRE', scope);
+          pre: function (scope, element, attrs, ctrl) {
+            console.log('PRE CALL');
           },
-          post: function (scope, element, attrs) {
-            console.log('VALUE OF SLIDE TABLE Element', scope);
+          post: function (scope, element, attrs, ctrl) {
+            ctrl.getListOfTabularData(ctrl, function (data) {
+              var idx = 1;
+              ctrl.data = data.payload['event'][idx];
+              console.log('THE DATA IN CALLBACK', ctrl.data);
+            });
+            console.log('POST CALL');
           }
         };
       }
@@ -37,23 +49,22 @@ define(['app', 'text!slide-html', 'text!slide-css'], function (app, slidehtml, s
   '$scope', 
   '$compile', 
   '$element',
-  function ($scope, $compile, $element) {
+  'slideTableService',
+  function ($scope, $compile, $element, slideTableService) {
     var _this = this;
     var style = '<style type="text/css", rel="stylesheet" scoped>'+ slidecss +'</style>';
+    var apiURL = _this.api || './webservicemocks/event-data/0.1/index.json';
     
     //Compile the stylesheet into a usable DOM element and append it to the template
     $element.append($compile(style)($scope));
     
-    this.fontcolor = '#ff0000';
+    _this.fontcolor = '#ff0000';
     
-    console.log('Here is your SLIDE TABLE');
-    _this.defaults = {
-      
+    //Takes the scope object, which will come from the directive's bound controller        
+    _this.getListOfTabularData = function (scope, callback) {
+      slideTableService.getData(apiURL, scope, callback);
     };
     
-    _this.getListOfTabularData = function () {
-      
-    };
     _this.slideTable = function () {
       
     };

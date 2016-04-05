@@ -9,7 +9,8 @@ require.config({
         'app-config': 'app/app.config',
         'app-init': 'app/app-init',
         'app-routes': 'app/app.routes',
-        'domready': 'lib/domReady'        
+        'domready': 'lib/domReady',
+        'slide-table-service': '/js/slide-table/0.1/slide-table-service/0.1/index',        
     },
     shim: {
         'angular': {
@@ -28,7 +29,7 @@ require.config({
     }
 });
 
-require(['domready','app-init'], function (domready) {
+require(['domready','app-init', 'slide-table-service'], function (domready) {
     
     domready(function(){
         angular.element(document).find('html').attr('ng-app', 'app');
