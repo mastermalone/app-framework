@@ -12,4 +12,6 @@
 
 #slide-table .description {
 	padding:20px;
+	min-height:240px;
+	max-height:240px;
 }

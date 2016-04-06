@@ -16,12 +16,30 @@
 }
 #slider>#controls>#slide-content {
 	width:78%;
+	position:relative;
+	height:60px;
+	overflow-x: hidden;
 }
 
 #slider>#controls>#slide-content>ul {
+	position:absolute;
+	top:0px;
+	left:0px;
+	bottom:0px;
 	overflow:hidden;
 	margin:0px auto;
+	padding:0px;
 	border:solid 1px #cccccc;
+	overflow: hidden;
+	width:900px;
+}
+#slider>#controls>#slide-content>ul>li {
+	float:left;
+	display:inline-block;
+	border-right:solid 1px #cccccc;
+	width: 389px;
+	text-align:center;
+	padding: 20px;
 }
 #slider>#controls>.left, #slider>#controls>.right {
 	cursor:pointer

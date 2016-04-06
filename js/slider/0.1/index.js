@@ -11,7 +11,8 @@ define([
 	'text!sliderhtml', 
 	'text!slidercss',
 	'emitter',
-	'event-service'], 
+	'event-service',
+	'slider-service'], 
 	function (app, slidehtml, slidecss, emitter) {//Do not add angular services as an argument
 	'use strict';
 	
@@ -19,6 +20,7 @@ define([
 		return {
 			restrict: 'E',
 			scope: {
+			  api: '@',
 			  left: '&slideLeft',//bound to the normalized version of this element attribute
 			  right: '&slideRight',
 			},
@@ -29,12 +31,17 @@ define([
 			compile: function () {
 				return {
 					post: function (scope, element, attrs, ctrl) {
-						ctrl.eventService.on('slide:left', function () {
-              console.log('Animate Left');
-            });
-						ctrl.eventService.on('slide:right', function () {
-              console.log('Animate right');
-            });
+					  ctrl.getData(scope, function (data) {
+					    var idx = 0;
+					    ctrl.data = data.payload['event'][idx];
+					    ctrl.apiData = data.payload['event'];
+					    ctrl.eventService.on('slide:left', function () {
+                console.log('Animate Left');
+              });
+              ctrl.eventService.on('slide:right', function () {
+                console.log('Animate right');
+              });
+					  });
 					}
 				};
 			}
@@ -46,16 +53,20 @@ define([
 	'$compile', 
 	'$element',
 	'eventService',
-	function ($scope, $compile, $element, eventService) {
+	'sliderService',
+	function ($scope, $compile, $element, eventService, sliderService) {
+	  var _this = this;
 		var style = '<style type="text/css" rel="stylesheet">'+ slidecss + '</style>';
-		var _this = this;
+		var apiURL = _this.api || './webservicemocks/event-data/0.2/index.json';
+		
+		console.log('ELEMNT WIDTH', $element);
 		//Compile the style element into a usable DOM string and append it to the directive element
 		$element.append($compile(style)($scope));
 		
 		_this.eventService = eventService; //Give access to this service throught this scope
 		
-		_this.getData = function () {
-		  
+		_this.getData = function (scope, callback) {
+		  sliderService.getData(apiURL, scope, callback);
 		};
 		_this.slideLeft = function () {
 		  _this.eventService.emit('prev');

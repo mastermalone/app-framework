@@ -12,8 +12,7 @@ require.config({
         'domready': 'lib/domReady',
         'emitter': 'lib/eventemitter2',
         'event-service': '/js/event-service/0.1/index',
-        'http-service': '/js/http-service/0.1/index',
-        'slide-table-service': '/js/slide-table/0.1/slide-table-service/0.1/index'        
+        'http-service': '/js/http-service/0.1/index'        
     },
     shim: {
         'angular': {
