@@ -11,7 +11,9 @@ require.config({
         'app-routes': 'app/app.routes',
         'domready': 'lib/domReady',
         'emitter': 'lib/eventemitter2',
-        'slide-table-service': '/js/slide-table/0.1/slide-table-service/0.1/index',        
+        'event-service': '/js/event-service/0.1/index',
+        'http-service': '/js/http-service/0.1/index',
+        'slide-table-service': '/js/slide-table/0.1/slide-table-service/0.1/index'        
     },
     shim: {
         'angular': {
@@ -29,11 +31,22 @@ require.config({
         },
         'emitter': {
         	exports: 'emitter'
-        } 
+        },
+        'event-service': {
+          deps: ['emitter'],
+          exports: 'event-service'
+        }
     }
 });
 
-require(['domready','app-init', 'slide-table-service', 'emitter'], function (domready) {
+require([
+  'domready',
+  'app-init', 
+  'slide-table-service', 
+  'emitter', 
+  'event-service', 
+  'http-service'], 
+  function (domready) {
     
     domready(function(){
         angular.element(document).find('html').attr('ng-app', 'app');

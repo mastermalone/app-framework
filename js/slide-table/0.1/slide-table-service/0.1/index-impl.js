@@ -1,21 +1,15 @@
 
+
 define(function () {
   'use strict';
   
-  return function SlideTableFactory (http) {
+  return function SlideTableFactory (http, httpService) {
     var _this = this;
-    
+        
     function getData(url, scope, callback) {
-      var message;
-      
-      http({
-        method: 'GET',
-        url: url
-      }).then(function successfulHTTP(response) {        
-        if (typeof callback === 'function') {callback(response.data);};
-      }, function erroneusHTTP(response) {
-        message = response;
-      });
+      //Injected service, httpService called
+      httpService.options.getData(url, scope, callback);
+      console.log("HTTP OPTIONS: ", httpService.options);
     }
     
     function sildeTable() {
