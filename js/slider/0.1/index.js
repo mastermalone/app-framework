@@ -21,8 +21,6 @@ define([
 			restrict: 'E',
 			scope: {
 			  api: '@',
-			  left: '&slideLeft',//bound to the normalized version of this element attribute
-			  right: '&slideRight',
 			  slideWrap: '@',
 			  slideTabs: '@'
 			},
@@ -51,14 +49,12 @@ define([
                   
                   ctrl.eventService.on('prev', function () {
                     idx !== 0 ? idx-=1 : 0;
-                    ctrl.slideDistanceValue += stWidth;
-                    console.log('Animate right', slideTab.offsetWidth, ctrl.slideDistanceValue);
+                    idx !== 0 ? ctrl.slideDistanceValue += stWidth : ctrl.slideDistanceValue = 0;
                   });
                   
                   ctrl.eventService.on('next', function () {
                     idx < ((data.payload['event'].length)-1)  ? idx+=1 : ((data.payload['event'].length)-1);
                     ctrl.slideDistanceValue = -stWidth*idx;
-                    console.log('Animate right', slideWrap.querySelector('.slide-tab'), slideTab.offsetWidth, ctrl.slideDistanceValue);
                     angular.element(slideWrap).addClass('slide');
                   });
                 }, 0);

@@ -25,7 +25,7 @@ define([
       	css: '@',
       	api: '@',
       	events: '@',
-      	animate: '@'
+      	animate: '@'//ID or class of template element you want to animate
       },
       controller: 'SlideTableController',
       controllerAs: 'stCtrl',
@@ -36,31 +36,28 @@ define([
         return {
           post: function (scope, element, attrs, ctrl) {
             var desc = document.getElementById(ctrl.animate) || document.querySelector('.'+ctrl.animate);
-             
-            console.log('ANIMATE THIS', desc);
             
             ctrl.getData(ctrl, function (data) {
               var idx = 0;
               ctrl.data = data.payload['event'][idx];
+              angular.element(desc).addClass('fadein');
+              ctrl.bgImage = data.payload['event'][idx].image;
               
               ctrl.eventService.on('prev', function () {
                 idx !== 0 ? idx-=1 : 0;
                 ctrl.data = data.payload['event'][idx];
-              });
-              ctrl.eventService.on('next', function () {
-                //desc.style.opacity = 0;
-                idx < ((data.payload['event'].length)-1)  ? idx+=1 : ((data.payload['event'].length)-1);
-                ctrl.data = data.payload['event'][idx];
-                
-                //angular.element(desc).removeClass('fadein');
-                //angular.element(desc).addClass('fadein');
-                desc.addEventListener(ctrl.transitionEnd, function (e) {
-                  //desc.style.opacity = 0;
-                  //ctrl.data = data.payload['event'][idx];
-                  //angular.element(desc).removeClass('fadeout');
-                });
+                ctrl.bgImage = data.payload['event'][idx].image;
               });
               
+              ctrl.eventService.on('next', function () {
+                idx < ((data.payload['event'].length)-1)  ? idx+=1 : ((data.payload['event'].length)-1);
+                ctrl.data = data.payload['event'][idx];
+                ctrl.bgImage = data.payload['event'][idx].image;
+                desc.addEventListener(ctrl.transitionEnd, function (e) {
+                  
+                  console.log('ELEMENT', angular.element(desc));
+                });
+              });
             });
           }
         };
@@ -84,19 +81,14 @@ define([
     $element.append($compile(style)($scope));
     
     _this.eventService = eventService; //Give access to this service throught this scope
-    
-    _this.fontcolor = '#ff0000';
-    
+    _this.fontcolor = '#000000';
+    _this.opacity = 0;//Set CSS value for fade in trasition
+    _this.bgImage = '';
     _this.transitionEnd = cssTransition.transitionEnd();
     
-    //Takes the scope object, which is bound to the directive's scope        
+    //Pass in the scope object, which is bound to the directive's isolate scope        
     _this.getData = function (scope, callback) {
       slideTableService.getData(apiURL, scope, callback);
     };
-    
-    _this.slideTable = function () {
-      
-    };
-    console.log('TRANSITION EL:', _this.animate);
   }]);
 });
