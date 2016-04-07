@@ -50,11 +50,11 @@
 	-webkit-opacity: 0;
 	-webkit-opacity: 0;
   -moz-opacity: 0;
-  -webkit-transition: opacity 0s ease;
-  -moz-transition: opacity 0s ease;
-  -ms-transition: opacity 0s ease;
-  -o-transition: opacity 0s ease;
-  transition: opacity 0s ease;
+  -webkit-transition: opacity .5s ease;
+  -moz-transition: opacity .5s ease;
+  -ms-transition: opacity .5s ease;
+  -o-transition: opacity .5s ease;
+  transition: opacity .5s ease;
 }
 #slide-table .description.opacity1 {
 	opacity:1;
