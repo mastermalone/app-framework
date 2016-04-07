@@ -2,7 +2,7 @@
 	<ul id="controls">
 		<li class="left" ng-click="slideCtrl.slideLeft()"><span></span></li>
 		<li id="slide-content">
-			<ul><li ng-repeat="key in slideCtrl.apiData">{{key.name}}</li></ul>
+			<ul class="slide-wrap"><li class="slide-tab" ng-repeat="key in slideCtrl.apiData">{{key.name}}</li></ul>
 		</li>
 		<li class="right" ng-click="slideCtrl.slideRight()"><span></span></li>
 	</ul>

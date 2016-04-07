@@ -31,7 +31,8 @@
 	padding:0px;
 	border:solid 1px #cccccc;
 	overflow: hidden;
-	width:900px;
+	width:900px;/*Default*/
+	width:{{slideCtrl.totalSlidesLength}}px;
 }
 #slider>#controls>#slide-content>ul>li {
 	float:left;
@@ -64,3 +65,12 @@
 	border-width: 30px 0 30px 60px;
 	border-color: transparent transparent transparent #666666;
 }
+#slider>#controls>#slide-content>ul.slide {
+	left:430px;
+	left:{{slideCtrl.slideDistanceValue}}px;
+	-webkit-transition: all 1s ease-in-out;
+  -moz-transition: all 1s ease-in-out;
+  -o-transition: all 1s ease-in-out;
+  transition: all 1s ease-in-out;
+}
+

@@ -12,7 +12,8 @@ define([
   'text!slide-css',
   'emitter',
   'event-service',
-  'slide-table-service'
+  'slide-table-service',
+  'css-transition-service'
   ], 
   function (app, slidehtml, slidecss, emitter) {
   'use strict';
@@ -23,7 +24,8 @@ define([
       scope: {
       	css: '@',
       	api: '@',
-      	events: '@'
+      	events: '@',
+      	animate: '@'
       },
       controller: 'SlideTableController',
       controllerAs: 'stCtrl',
@@ -33,6 +35,10 @@ define([
       compile: function () {
         return {
           post: function (scope, element, attrs, ctrl) {
+            var desc = document.getElementById(ctrl.animate) || document.querySelector('.'+ctrl.animate);
+             
+            console.log('ANIMATE THIS', desc);
+            
             ctrl.getData(ctrl, function (data) {
               var idx = 0;
               ctrl.data = data.payload['event'][idx];
@@ -42,9 +48,19 @@ define([
                 ctrl.data = data.payload['event'][idx];
               });
               ctrl.eventService.on('next', function () {
+                //desc.style.opacity = 0;
                 idx < ((data.payload['event'].length)-1)  ? idx+=1 : ((data.payload['event'].length)-1);
                 ctrl.data = data.payload['event'][idx];
+                
+                //angular.element(desc).removeClass('fadein');
+                //angular.element(desc).addClass('fadein');
+                desc.addEventListener(ctrl.transitionEnd, function (e) {
+                  //desc.style.opacity = 0;
+                  //ctrl.data = data.payload['event'][idx];
+                  //angular.element(desc).removeClass('fadeout');
+                });
               });
+              
             });
           }
         };
@@ -58,7 +74,8 @@ define([
   '$element',
   'slideTableService',
   'eventService',
-  function ($scope, $compile, $element, slideTableService, eventService) {
+  'cssTransition',
+  function ($scope, $compile, $element, slideTableService, eventService, cssTransition) {
     var _this = this;
     var style = '<style type="text/css", rel="stylesheet" scoped>'+ slidecss +'</style>';
     var apiURL = _this.api || './webservicemocks/event-data/0.1/index.json';
@@ -70,6 +87,8 @@ define([
     
     _this.fontcolor = '#ff0000';
     
+    _this.transitionEnd = cssTransition.transitionEnd();
+    
     //Takes the scope object, which is bound to the directive's scope        
     _this.getData = function (scope, callback) {
       slideTableService.getData(apiURL, scope, callback);
@@ -78,5 +97,6 @@ define([
     _this.slideTable = function () {
       
     };
+    console.log('TRANSITION EL:', _this.animate);
   }]);
 });

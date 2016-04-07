@@ -1,6 +1,8 @@
 <div ng-controller="mainController as mainCtrl">
     <div>{{mainCtrl.pageTitle}}</div>    
 </div>
-<slide-table api="./webservicemocks/event-data/0.1/index.json" events="slide: left, slide: right">
-	<slider></slider>
+<slide-table api="./webservicemocks/event-data/0.1/index.json" 
+  events="slide: left, slide: right" 
+  animate="description">
+	<slider slide-wrap="slide-wrap" slide-tabs="slide-tab"></slider>
 </slide-table>
