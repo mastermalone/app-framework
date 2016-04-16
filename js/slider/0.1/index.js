@@ -36,25 +36,25 @@ define([
 					    var defer = ctrl.q.defer();
 					    
 					    function setCtrlData() {
-					      ctrl.data = data.payload['event'][idx];
-                ctrl.apiData = data.payload['event'];
+					      ctrl.data = data.payload.event[idx];
+                ctrl.apiData = data.payload.event;
 					    }
 					    
 					    function initListeners() {
 					      ctrl.timeout(function () {
-                  var slideWrap = document.getElementById(attrs.slideWrap) || document.querySelector('.'+attrs.slideWrap);
-                  var slideTab = document.getElementById(attrs.slideTabs) || document.querySelector('.'+attrs.slideTabs);
-                  var stWidth = slideTab.offsetWidth;
-                  ctrl.totalSlidesLength = (slideTab.offsetWidth*ctrl.apiData.length);
+                  var slideWrap = document.getElementById(attrs.slideWrap) || document.querySelector('.'+attrs.slideWrap); //Get the value set in the directive element's slide-wrap attribute
+                  var slideTab = document.getElementById(attrs.slideTabs) || document.querySelector('.'+attrs.slideTabs); //Get the value set in the directive element's slide-tab attribute
+                  var stWidth = slideTab.offsetWidth; //Get the value of an individual slide-tab LI element for use in a calculation to determine the length of it's parent container
+                  ctrl.totalSlidesLength = (slideTab.offsetWidth*ctrl.apiData.length); //Calculated width of all slides 
                   
                   ctrl.eventService.on('prev', function () {
                     idx !== 0 ? idx-=1 : 0;
-                    idx !== 0 ? ctrl.slideDistanceValue += stWidth : ctrl.slideDistanceValue = 0;
+                    idx !== 0 ? ctrl.slideDistanceValue += stWidth : ctrl.slideDistanceValue = 0; //Setting this value here directly updates the bound CSS, allowing the slides to animate to the left
                   });
                   
                   ctrl.eventService.on('next', function () {
-                    idx < ((data.payload['event'].length)-1)  ? idx+=1 : ((data.payload['event'].length)-1);
-                    ctrl.slideDistanceValue = -stWidth*idx;
+                    idx < ((data.payload.event.length)-1)  ? idx+=1 : ((data.payload.event.length)-1);
+                    ctrl.slideDistanceValue = -stWidth*idx; //Setting this value here directly updates the bound CSS, allowing the slides to animate to the right
                     angular.element(slideWrap).addClass('slide');
                   });
                 }, 0);
@@ -89,12 +89,12 @@ define([
 		
 		_this.eventService = eventService; //Give access to this service throught this scope
 		_this.timeout = $timeout;
-		_this.totalSlidesLength = '';
+		_this.totalSlidesLength = ''; //Bound to the compiled CSS file as properties
 		_this.slideDistanceValue = '';
 		_this.q = $q;
 		
 		_this.getData = function (scope, callback) {
-		  sliderService.getData(apiURL, scope, callback);
+		  sliderService.getData(apiURL, scope, callback); //Get some data
 		};
 		_this.slideLeft = function () {
 		  _this.eventService.emit('prev');

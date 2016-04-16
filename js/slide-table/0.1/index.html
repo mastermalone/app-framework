@@ -2,7 +2,8 @@
 	<div class="title">Slide View Directive</div>
 	<input ng-model="stCtrl.fontcolor" type="text" placeholder="Enter a color value"/>
 	<div id="description" class="description">
-	  <div class="text-view">{{stCtrl.data.description}}</div>
+	  <!-- Retrieved from the controller's data property.  The text displayed is determined by the idx variable that is set by the event handler for the 'prev and next' events-->
+	  <div class="text-view">{{stCtrl.data.description}}</div> 
 	</div>
-	<div ng-transclude></div>
+	<div ng-transclude></div> <!-- This is where transluded content will be cloned into -->
 </div>

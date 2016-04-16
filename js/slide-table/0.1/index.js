@@ -31,7 +31,7 @@ define([
       controllerAs: 'stCtrl',
       bindToController: true,
       template: slidehtml,
-      transclude: true,
+      transclude: true, //Needed to allow this directive's element to wrap other elements.
       compile: function () {
         return {
           post: function (scope, element, attrs, ctrl) {
@@ -39,23 +39,23 @@ define([
             
             ctrl.getData(ctrl, function (data) {
               var idx = 0;
-              ctrl.data = data.payload['event'][idx];
+              ctrl.data = data.payload.event[idx];
               angular.element(desc).addClass('fadein');
-              ctrl.bgImage = data.payload['event'][idx].image;
+              ctrl.bgImage = data.payload.event[idx].image;
               
               ctrl.eventService.on('prev', function () {
                 idx !== 0 ? idx-=1 : 0;
-                ctrl.data = data.payload['event'][idx];
-                ctrl.bgImage = data.payload['event'][idx].image;
+                ctrl.data = data.payload.event[idx];
+                ctrl.bgImage = data.payload.event[idx].image;
               });
               
               ctrl.eventService.on('next', function () {
-                idx < ((data.payload['event'].length)-1)  ? idx+=1 : ((data.payload['event'].length)-1);
-                ctrl.data = data.payload['event'][idx];
-                ctrl.bgImage = data.payload['event'][idx].image;
+                idx < ((data.payload['event'].length)-1)  ? idx+=1 : ((data.payload['event'].length)-1); //Increase the idx value if idx is less than the number of items in the data 
+                ctrl.data = data.payload.event[idx]; //Update the value of the controller's data property' for use in the view
+                ctrl.bgImage = data.payload.event[idx].image; 
+                
                 desc.addEventListener(ctrl.transitionEnd, function (e) {
-                  
-                  console.log('ELEMENT', angular.element(desc));
+                  //If needed for after CSS Tramsiton is complete
                 });
               });
             });
@@ -80,7 +80,7 @@ define([
     //Compile the stylesheet into a usable DOM element and append it to the directive element
     $element.append($compile(style)($scope));
     
-    _this.eventService = eventService; //Give access to this service throught this scope
+    _this.eventService = eventService; //Give access to this service throught this scope which is bound to the directive
     _this.fontcolor = '#000000';
     _this.opacity = 0;//Set CSS value for fade in trasition
     _this.bgImage = '';
