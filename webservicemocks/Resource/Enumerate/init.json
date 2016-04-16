@@ -1,0 +1,11 @@
+{
+    "success": "true",
+    "payload": {
+        "api_endpoints": {
+            "state_list": "/states/init.json"
+        },
+        "api_domains" {
+            "localhost": "/localhost:4001/webservicemocks/event-data/0.1/index.json"
+        }
+    }
+}
