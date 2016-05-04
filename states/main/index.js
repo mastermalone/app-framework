@@ -24,23 +24,8 @@ define([
 	function (app, getState) {
     'use strict';
     
+    //This page has a template that is determined via the ui-router
     console.log('From main/index.js: loaded 3rd, since this is the main page.');
-    
-    
-    /*app.registerDirective('mainDirective', [function () {
-        return {
-            restrict: 'AE',
-            scope: {},
-            controller: 'mainController',
-            controllerAs: 'mainCtrl',
-            bindToController: true,
-            link: function (scope, element, attrs, ctrl) {
-                //Add some logic here for the directive
-                //the ctrl arg represents the controller if you want to use it here in the link function
-                ctrl.orderMethods();
-            }
-        };
-    }]);*/
     
     //app.registerController('mainController', ['$scope', 'promiseFactory', function ($scope, promiseFactory) {
     app.registerController('mainController', ['$scope', function ($scope) {
