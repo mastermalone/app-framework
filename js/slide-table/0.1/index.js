@@ -51,6 +51,9 @@ define([
               });
               
               ctrl.eventService.on('next', function () {
+              	if (idx >= ((data.payload['event'].length)-1)) {
+                 	idx = -1;
+                }
                 idx < ((data.payload['event'].length)-1)  ? idx+=1 : ((data.payload['event'].length)-1); //Increase the idx value if idx is less than the number of items in the data 
                 ctrl.data = data.payload.event[idx]; //Update the value of the controller's data property' for use in the view
                 ctrl.bgImage = data.payload.event[idx].image; 

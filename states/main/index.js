@@ -29,21 +29,8 @@ define([
     //This page has a template that is determined via the ui-router
     console.log('From main/index.js: loaded 3rd, since this is the main page.');
     
-    //app.registerController('mainController', ['$scope', 'promiseFactory', function ($scope, promiseFactory) {
     app.registerController('mainController', ['$scope', function ($scope) {
         //Main Page controller
         this.pageTitle = 'Custom Directives';
-        
-        this.orderMethods = function () {
-            //promiseFactory.init(this.method1).then(this.method2);
-        };
-        
-        this.method1 = function (resolve, reject) {
-            console.log('Method 1');
-        };
-        
-        this.method2 = function (resolve, reject) {
-            console.log('Method 2');
-        };
     }]);
 });

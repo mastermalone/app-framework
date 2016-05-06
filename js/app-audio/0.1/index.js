@@ -1,8 +1,3 @@
-// require.config({
-  // paths: {
-    // 'app-audio-service': './js/app-audio-service/0.1/index'
-  // }
-// });
 
 define(['app', 'app-audio-service'], function (app) {//Don't add custom made angular services as an argument
   'use strict';
@@ -26,7 +21,9 @@ define(['app', 'app-audio-service'], function (app) {//Don't add custom made ang
         
         ctrl.getData(scope, function (data) {
           console.log('HERES YO DATA', data);
-          ctrl.startAudio(data);
+          if (ctrl.autoPlay === 'true') {
+          	ctrl.startAudio(data);
+          }
         });
       }
     };
