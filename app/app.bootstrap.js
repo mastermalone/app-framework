@@ -12,7 +12,8 @@ require.config({
         'domready': 'lib/domReady',
         'emitter': 'lib/eventemitter2',
         'event-service': '/js/event-service/0.1/index',
-        'http-service': '/js/http-service/0.1/index'        
+        'http-service': '/js/http-service/0.1/index',
+        'app-audio-service': '/js/app-audio-service/0.1/index'        
     },
     shim: {
         'angular': {
@@ -44,7 +45,8 @@ require([
   'slide-table-service', 
   'emitter', 
   'event-service', 
-  'http-service'], 
+  'http-service',
+  'app-audio-service'], 
   function (domready) {
     
     domready(function(){

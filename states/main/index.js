@@ -7,7 +7,8 @@ require.config({
         //'promise-factory': './js/promise-service/index',
         's-pannel': './js/side-pannel/0.1/index',
         'slide-table': './js/slide-table/0.1/index', 
-        'slider': './js/slider/0.1/index', 
+        'slider': './js/slider/0.1/index',
+        'app-audio': './js/app-audio/0.1/index' 
     } 
 });
 
@@ -19,7 +20,8 @@ define([
 	'auto', 
 	's-pannel', 
 	'slide-table',
-	'slider'], 
+	'slider',
+	'app-audio'], 
 	//function (app, getState, promiseFactory) {
 	function (app, getState) {
     'use strict';

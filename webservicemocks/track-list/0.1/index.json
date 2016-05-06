@@ -1,0 +1,18 @@
+{
+  "success": "true",
+  "payload": {
+    "event": [{
+        "track": "Beach Day",
+        "file": "../../audio/ocean0.mp3"
+      },
+      {
+        "track": "Applause",
+        "file": "../../audio/ocean1.mp3"
+      },
+      {
+        "track": "Some BS",
+        "file": "../../audio/ocean2.mp3"
+      }
+    ]
+  }
+}

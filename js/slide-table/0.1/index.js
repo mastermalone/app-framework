@@ -18,6 +18,7 @@ define([
   function (app, slidehtml, slidecss, emitter) {
   'use strict';
   
+  console.log('HELLO', emitter);
   app.registerDirective('slideTable', [function (scope, element, attrs) {
     return {
       restrict: 'EA',
