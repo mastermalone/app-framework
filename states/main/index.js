@@ -8,13 +8,15 @@ require.config({
         's-pannel': './js/side-pannel/0.1/index',
         'slide-table': './js/slide-table/0.1/index', 
         'slider': './js/slider/0.1/index',
-        'app-audio': './js/app-audio/0.1/index' 
+        'app-audio': './js/app-audio/0.1/index',
+        'maincss': './states/main/index.css',
     } 
 });
 
 define([
 	'app', 
-	'get-state-service', 
+	'get-state-service',
+	'text!maincss', 
 	//'promise-factory', 
 	'tout', 
 	'auto', 
@@ -23,11 +25,13 @@ define([
 	'slider',
 	'app-audio'], 
 	//function (app, getState, promiseFactory) {
-	function (app, getState) {
+	function (app, getState, maincss) {
     'use strict';
     
     //This page has a template that is determined via the ui-router
     console.log('From main/index.js: loaded 3rd, since this is the main page.');
+    
+    //app.registerdirective
     
     app.registerController('mainController', ['$scope', function ($scope) {
         //Main Page controller

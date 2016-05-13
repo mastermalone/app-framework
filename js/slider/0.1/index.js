@@ -48,8 +48,7 @@ define([
 					    function initListeners() {
 					      ctrl.timeout(function () {
 					      	if (ctrl.autoPlay === 'true') {
-					      		console.log('YESS ITS TRUE', ctrl.timerService);
-					      		ctrl.timerService.init(3000, 'next', ctrl.slideRight, scope, ctrl.timeout, rightCtrl);
+					      		ctrl.timerService.init(10000, 'next', ctrl.slideRight, scope, ctrl.timeout, rightCtrl);
 					      	}
                   var slideWrap = document.getElementById(attrs.slideWrap) || document.querySelector('.'+attrs.slideWrap); //Get the value set in the directive element's slide-wrap attribute
                   var slideTab = document.getElementById(attrs.slideTabs) || document.querySelector('.'+attrs.slideTabs); //Get the value set in the directive element's slide-tab attribute
@@ -70,7 +69,6 @@ define([
                     idx < ((data.payload.event.length)-1)  ? idx+=1 : ((data.payload.event.length)-1);
                     ctrl.slideDistanceValue = (-stWidth*idx); //Setting this value here directly updates the bound CSS, allowing the slides to animate to the right
                     angular.element(slideWrap).addClass('slide');
-                    console.log('Hitting next', idx);
                   });
                 }, 0);
 					    }
@@ -98,7 +96,7 @@ define([
 	function ($scope, $compile, $element, eventService, sliderService, $timeout, $q, timerService) {
 	  var _this = this;
 		var style = '<style type="text/css" rel="stylesheet">'+ slidecss + '</style>';
-		var apiURL = _this.api || './webservicemocks/event-data/0.2/index.json';
+		var apiURL = _this.api || './webservicemocks/event-data/0.1/index.json';
 		
 		//Compile the style element into a usable DOM string and append it to the directive element
 		$element.append($compile(style)($scope));

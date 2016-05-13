@@ -1,5 +1,14 @@
+body {
+	background: #e1e1e1;
+}
+
 #main {
-	width: 100%;
+	width: 90%;
 	margin:30px auto;
-	
+	padding: 200px 0px;
+	background: url("../../images/rose-bg.jpg") no-repeat center #e1e1e1;
+	background-size: cover;
+	border:solid 1px #CCCCCC;
+	box-shadow: 0px 0px 5px #cccccc;
+	border-radius: 20px;
 }

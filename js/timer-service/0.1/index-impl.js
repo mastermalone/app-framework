@@ -21,13 +21,12 @@ define(function () {
 			startTimer: function (interval, callback) {
 				console.log('TIMER SERVICE', this, interval);
 				TimerService.prototype.callback = callback;
-				TimerService.prototype.tmr = setInterval(this.emitOnInterval, interval);
+				TimerService.prototype.tmr = setInterval(this.triggerExternalHandler, interval);
 				//TimerService.prototype.tmr = setInterval('this.callback()', interval);
 				
 				TimerService.prototype.eventService = eventService;
 			},
-			emitOnInterval: function (event) {
-				console.log('EMITTING EVENT');				
+			triggerExternalHandler: function (event) {		
 				TimerService.prototype.timeout(function() {
 		      angular.element(TimerService.prototype.elmID).triggerHandler('click');
 		    }, 0);

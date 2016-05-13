@@ -1,7 +1,7 @@
 #slide-table {
 	font-family: 'Arial';
 	font-size:18px;
-	width: 550px;
+	width: 960px;
 	margin:0px auto;
 	padding: 20px 0px;
 	border:solid 1px #e1e1e1;
@@ -17,8 +17,13 @@
 #slide-table .title{
 	padding:20px;
 	font-weight:bold;
+	font-size:30px;
+	font-style: italic;
+	color:#FF0000;
+	text-shadow: 0px 3px #333333;
 }
 #slide-table>input{
+	display:none;
 	font-size:16px;
 	padding:5px;
 	margin-bottom:20px;
@@ -27,8 +32,9 @@
 }
 #slide-table .description {
 	padding:20px;
-	min-height:215px;
-	max-height:215px;
+	position: relative;
+	min-height:720px;
+	max-height:720px;
 	overflow-y:auto;
 	opacity: {{stCtrl.opacity}};
 	-webkit-opacity: {{stCtrl.opacity}};
@@ -38,12 +44,19 @@
   -ms-transition: all 1s ease;
   -o-transition: all 1s ease;
   transition: all 1s ease;
-	background: url({{stCtrl.bgImage}}) no-repeat center rgba(255,255,255,0.4);
+	background: url({{stCtrl.bgImage}}) no-repeat center rgba(255,255,255,0.1);
 }
 #slide-table .description .text-view {
-	background: rgba(255, 255, 255, 0.6);
+	font-weight:bold;
+	font-size:20px;
+	text-align:center;
+	background: rgba(255, 255, 255, 0.8);
 	border-radius: 10px;
 	padding:20px;
+	position: absolute;
+	bottom: 40px;
+	right:20px;
+	left: 20px;
 }
 #slide-table .description.fadeout {
 	opacity:0;
