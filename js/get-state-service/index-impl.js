@@ -1,13 +1,18 @@
 define(function () {
     'use strict';
     
-    function GetState (toState) {
-        console.log('Obtaining state value', toState);
-        return {
-            currentState: toState
-        };
-    }
+    return function GetStateService (toState) {
+      
+      function getState (state) {
+        
+        return state;
+      }
+      console.log('Obtaining state value', getState);
+      return {
+          getstate: getState
+      };
+    };
     
     //console.log('State to return', Getstate.currentState);
-    return GetState;
+    //return GetState;
 });

@@ -10,7 +10,7 @@ require.config({
 
 require([
   'app', 
-  /*'main'*/, 
+  /*'main',*/ 
   'slider-service', 
   'css-transition-service'], 
   function (app) {
