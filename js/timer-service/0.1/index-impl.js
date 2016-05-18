@@ -1,21 +1,21 @@
 define(function () {
 	'use strict';
-	
+
 	return function TimerFactory(eventService) {
-		
+
 		function TimerService(interval) {
 			this.interval = interval;
 		}
-		
+
 		TimerService.prototype = {
 			constructor: TimerService,
 			init: function (interval, evt, callback, scope, timeout, elmID) {
 				TimerService.prototype.evt = evt;
-				
+
 				TimerService.prototype.scope = scope;
 				TimerService.prototype.timeout = timeout;
 				TimerService.prototype.elmID = elmID;
-				
+
 				TimerService.prototype.startTimer(interval, callback);
 			},
 			startTimer: function (interval, callback) {
@@ -23,11 +23,11 @@ define(function () {
 				TimerService.prototype.callback = callback;
 				TimerService.prototype.tmr = setInterval(this.emitOnInterval, interval);
 				//TimerService.prototype.tmr = setInterval('this.callback()', interval);
-				
+
 				TimerService.prototype.eventService = eventService;
 			},
 			emitOnInterval: function (event) {
-				console.log('EMITTING EVENT');				
+				//console.log('EMITTING EVENT');				
 				TimerService.prototype.timeout(function() {
 		      angular.element(TimerService.prototype.elmID).triggerHandler('click');
 		    }, 0);
@@ -37,7 +37,7 @@ define(function () {
 				clearInterval(TimerService.prototype.tmr);
 			}
 		};
-		
+
 		return {
 			init: TimerService.prototype.init,
 			startTimer: TimerService.prototype.startTimer,

@@ -2,6 +2,14 @@ require.config({
     paths: {
         'app': '../app/app',
         //'main': '../states/main/index',
+        'tout': './js/modules/tout-directive/index',
+        'get-state-service': './js/get-state-service/index',
+        'auto': './js/auto-complete/index',
+        //'promise-factory': './js/promise-service/index',
+        's-pannel': './js/side-pannel/0.1/index',
+        'slide-table': './js/slide-table/0.1/index',
+        'slider': './js/slider/0.1/index',
+        'app-audio': './js/app-audio/0.1/index',
         'slide-table-service': './js/slide-table/0.1/slide-table-service/0.1/index',
         'slider-service': './js/slider/0.1/slider-service/0.1/index',
         'css-transition-service': './js/css-transition-service/0.1/index'
@@ -9,10 +17,16 @@ require.config({
 });
 
 require([
-  'app', 
-  /*'main'*/, 
-  'slider-service', 
-  'css-transition-service'], 
+  'app',
+  /*'main'*/,
+  'tout',
+  'auto',
+  's-pannel',
+  'slide-table',
+  'slider',
+  'app-audio',
+  'slider-service',
+  'css-transition-service'],
   function (app) {
     console.log('loading main page:  Loads 4th');
 });

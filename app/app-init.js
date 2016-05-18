@@ -6,13 +6,16 @@ define(['app', 'app-config'], function (app) {
         $rootScope.state = $state;
         $rootScope.stateParames = $stateParams;
         app.lazy = $couchPotato;
-        
+
         //console.log('LAZY Loads 7th', app.lazy);
         console.log('Value opf $stateParams:oads 7th', $stateParams);
-        
+
         $rootScope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState, fromParams) {
-            $rootScope.toState = toState; 
+            $rootScope.toState = toState;
+            var currentState = $rootScope.toState.name;
+
             console.log('Loads 9th', $rootScope.toState.name);
+            require(['./states/'+currentState+'/index']);
         });
     }]);
 });
