@@ -13,7 +13,8 @@ require.config({
         'emitter': 'lib/eventemitter2',
         'event-service': '/js/event-service/0.1/index',
         'http-service': '/js/http-service/0.1/index',
-        'app-audio-service': '/js/app-audio-service/0.1/index'        
+        'app-audio-service': '/js/app-audio-service/0.1/index',
+        'caching-service': '/js/caching-service/0.1/index'
     },
     shim: {
         'angular': {
@@ -35,20 +36,25 @@ require.config({
         'event-service': {
           deps: ['emitter'],
           exports: 'event-service'
+        },
+        'http-service': {
+          deps: ['caching-service'],
+          exports: 'http-service'
         }
     }
 });
 
 require([
   'domready',
-  'app-init', 
-  'slide-table-service', 
-  'emitter', 
-  'event-service', 
+  'app-init',
+  'slide-table-service',
+  'emitter',
+  'event-service',
   'http-service',
-  'app-audio-service'], 
+  'app-audio-service',
+  'caching-service'],
   function (domready) {
-    
+
     domready(function(){
         angular.element(document).find('html').attr('ng-app', 'app');
         angular.bootstrap(document, ['app']);

@@ -11,5 +11,5 @@ define(['app', 'http-index-impl'], function (app, httpIndexImpl) {
    * @param scope object
    * @param callback function
    */
-  app.registerFactory('httpService', ['$http', httpIndexImpl]);
+  app.registerFactory('httpService', ['$http', 'cachingService', httpIndexImpl]);
 });
