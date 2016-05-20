@@ -39,8 +39,10 @@ define([
           post: function (scope, element, attrs, ctrl) {
             var desc = document.getElementById(ctrl.animate) || document.querySelector('.'+ctrl.animate);
 
+            ctrl.setStorageID(ctrl.storageID);//Used to set the key name for the caching service localStorage object
             ctrl.getData(ctrl, function (data) {
               var idx = 0;
+
               ctrl.data = data.payload.event[idx];
               angular.element(desc).addClass('fadein');
               ctrl.bgImage = data.payload.event[idx].image;
@@ -63,7 +65,7 @@ define([
                   //If needed for after CSS Tramsiton is complete
                 });
               });
-            }, 'slideTable');
+            });
           }
         };
       }
@@ -90,11 +92,17 @@ define([
     _this.fontcolor = '#000000';
     _this.opacity = 0;//Set CSS value for fade in trasition
     _this.bgImage = '';
+    _this.storageID = 'slideTable';
     _this.transitionEnd = cssTransition.transitionEnd();
 
     //Pass in the scope object, which is bound to the directive's isolate scope
     _this.getData = function (scope, callback, storageID) {
+
+      console.log('THE ARGS', arguments);
       slideTableService.getData(apiURL, scope, callback, storageID);
     };
+    _this.setStorageID = function (id) {
+      return slideTableService.setStorageID(id);
+    }
   }]);
 });
