@@ -6,11 +6,6 @@ define(['app', 'app-routes'], function (app) {
         $urlRouterProvider.otherwise('/main');
         console.log('Value of stateprovider: loads 6th');
         $stateProvider
-            /*.state('main', {
-                url: '/main',
-                templateUrl: 'states/main/index.html',
-                controller: 'appController'
-            })*/
             .state('main', {
                 url: '/main',
                 templateUrl: 'states/main/index.html'

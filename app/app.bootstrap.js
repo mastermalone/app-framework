@@ -14,7 +14,8 @@ require.config({
         'event-service': '/js/event-service/0.1/index',
         'http-service': '/js/http-service/0.1/index',
         'app-audio-service': '/js/app-audio-service/0.1/index',
-        'caching-service': '/js/caching-service/0.1/index'
+        'caching-service': '/js/caching-service/0.1/index',
+        'text': '/lib/text'
     },
     shim: {
         'angular': {
@@ -46,6 +47,7 @@ require.config({
 
 require([
   'domready',
+  'text',
   'app-init',
   'slide-table-service',
   'emitter',

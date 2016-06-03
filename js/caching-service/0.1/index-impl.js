@@ -48,5 +48,5 @@ define(function () {
       setLocalStorage: CachingService.prototype.setLocalStorage,
       doesPayloadExist: CachingService.prototype.doesPayloadExist,
     };
-  }
+  };
 });

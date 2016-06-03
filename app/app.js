@@ -5,6 +5,5 @@ define(['angular', 'couch-potato', 'ui-router'], function (angular, couchPotato)
     var app = angular.module('app', ['scs.couch-potato', 'ui.router']);
             
     couchPotato.configureApp(app);
-    //console.log('app object', app);
     return app;
 });
