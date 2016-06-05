@@ -35,7 +35,7 @@ define(function () {
         ls.length < 1 && Object.keys(CachingService.prototype.ls())['slideTable'] !== 'undefined' ? exists = false : exists = true;
         console.log('EXISTS', exists);
         //return exists; //Release this dragon when ready
-        return false;
+        return exists; //Change to false to work all day long
       },
       ls: function () {
         var ls = localStorage;

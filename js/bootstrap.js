@@ -1,9 +1,6 @@
 require.config({
     paths: {
         'app': '../app/app',
-        //'app-config': 'app/app.config',
-        'tout': './js/modules/tout-directive/index',
-        'get-state-service': './js/get-state-service/index',
         'auto': './js/auto-complete/index',
         's-pannel': './js/side-pannel/0.1/index',
         'slide-table': './js/slide-table/0.1/index',
@@ -17,12 +14,12 @@ require.config({
 
 require([
   'app',
-  'tout',
   'auto',
   's-pannel',
   'slide-table',
   'slider',
   'app-audio',
+  'slide-table-service',
   'slider-service',
   'css-transition-service'],
   function (app) {

@@ -15,12 +15,12 @@ define(['app', 'app-audio-service'], function (app) {//Don't add custom made ang
       controllerAs: 'appACtrl',
       bindToController: true,
       link: function (scope, element, attrs, ctrl) {
-        console.log('AUDIO DIRECTIVE');
-        console.log('REGISTERING DIRECTIVE');
+        //console.log('AUDIO DIRECTIVE');
+        //console.log('REGISTERING DIRECTIVE');
         
         
         ctrl.getData(scope, function (data) {
-          console.log('HERES YO DATA', data);
+          //console.log('HERES YO DATA', data);
           if (ctrl.autoPlay === 'true') {
           	ctrl.startAudio(data);
           }
@@ -38,7 +38,7 @@ define(['app', 'app-audio-service'], function (app) {//Don't add custom made ang
     };
     
     _this.startAudio = function (data) {
-      console.log('MY AUDIO', appAudioService);
+      //console.log('MY AUDIO', appAudioService);
       appAudioService.init(data);
     };
   }]);

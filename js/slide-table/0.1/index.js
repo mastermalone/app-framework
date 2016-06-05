@@ -1,9 +1,7 @@
 require.config({
   paths: {
-    'slide-table-service': './js/slide-table/0.1/slide-table-service/0.1/index',
     'slide-html': './js/slide-table/0.1/index.html',
-    'slide-css': './js/slide-table/0.1/index.css',
-    //'caching-service': './js/caching-service/0.1/index'
+    'slide-css': './js/slide-table/0.1/index.css'
   }
 });
 
@@ -42,7 +40,7 @@ define([
             ctrl.setStorageID(ctrl.storageID);//Used to set the key name for the caching service localStorage object
             ctrl.getData(ctrl, function (data) {
               var idx = 0;
-
+              console.log('SLIDE TABLE DATA', data);
               ctrl.data = data.payload.event[idx];
               angular.element(desc).addClass('fadein');
               ctrl.bgImage = data.payload.event[idx].image;
@@ -98,11 +96,11 @@ define([
     //Pass in the scope object, which is bound to the directive's isolate scope
     _this.getData = function (scope, callback, storageID) {
 
-      console.log('THE ARGS', arguments);
+      //console.log('THE ARGS', arguments);
       slideTableService.getData(apiURL, scope, callback, storageID);
     };
     _this.setStorageID = function (id) {
       return slideTableService.setStorageID(id);
-    }
+    };
   }]);
 });
