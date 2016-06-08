@@ -24,22 +24,22 @@ define(function () {
         console.log('STORAGE ID', storageID);
       },
       setLocalStorage: function (payload, storageID) {
-        CachingService.prototype.ls().clear();//For testing purposes.  More work is needed here
-        CachingService.prototype.ls().setItem(storageID, payload);
-        console.log('LS', CachingService.prototype.ls());
+        if (localStorage.hasOwnProperty(storageID)) {
+          return;
+        }else {
+          window.localStorage.setItem(storageID, payload);
+          console.log('SETLOCALSTORAGE: Storage ID', storageID);
+          console.log('NEW KEY AND VALUE FOR LOCAL STORAGE', storageID, window.localStorage);
+        }
       },
-      doesPayloadExist: function () {
-        console.log('CHECKING PAYLOAD', CachingService.prototype.ls().hasOwnProperty('slideTable'));
-        var ls = CachingService.prototype.ls();
+      doesPayloadExist: function (prop) {
+        var ls = window.localStorage;
         var exists = false;
-        ls.length < 1 && Object.keys(CachingService.prototype.ls())['slideTable'] !== 'undefined' ? exists = false : exists = true;
-        console.log('EXISTS', exists);
-        //return exists; //Release this dragon when ready
+        
+        ls.length < 1 && !ls.hasOwnProperty(prop) ? exists = false : exists = true;
+        console.log('CHECKING PAYLOAD', ls.hasOwnProperty(prop));
+        console.log('LS PROP EXISTS', exists);
         return exists; //Change to false to work all day long
-      },
-      ls: function () {
-        var ls = localStorage;
-        return ls;
       }
     };
 

@@ -5,10 +5,16 @@ define(function () {
   return function SlideTableFactory (http, httpService) {
     var _this = this;
     //Expose httpService methods via these wrappers
-    function getData(url, scope, callback) {
+    
+    /*
+     * @param url: String
+     * @param scope: Object
+     * @param storageID: String
+     * @param callback: Function
+     */
+    function getData(url, scope, storageID, callback) {
       //Injected service, httpService called
-      httpService.options.getData(url, scope, callback);
-      console.log("HTTP OPTIONS: ", httpService.options);
+      httpService.options.getData(url, scope, storageID, callback);
     }
 
     function setStorageID(id) {

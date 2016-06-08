@@ -8,51 +8,54 @@ define(function () {
       _this: this,
       setID: '', //value for key name used by localStorage to identify the different values
       stored: {},
-      checkLocalStorage: function () {
-        return cachingService.doesPayloadExist();
+      checkLocalStorage: function (storageID) {
+        return cachingService.doesPayloadExist(storageID);
       },
-      getData : function (url, scope, callback, storageID) {
+      getData : function (url, scope, storageID, callback) {
         var _this = this;
         var message;
-
-        if (_this.checkLocalStorage() === false) {
+        
+        console.log('CHECK LOCAL STORAGE RESULT', storageID);        
+        console.log('ACCORING TO HTTP, LOCAL STORAGE HAS DATA?:', _this.checkLocalStorage(storageID));  
+        
+        if (typeof storageID !== 'string' && storageID !== '') {
+          console.log('You did not specify the ID of the controller for caching the API response.  Please set _this.storageID in your controller.');
+          return;
+        }      
+        if (_this.checkLocalStorage(storageID) === false) {
           http({
             method: 'GET',
-            url: url
+            url: url,
+            headers: {
+              'Content-Type': 'application/json'
+            }
           }).then(function successfulHTTP(response) {
             _this.stored[_this.setID] = response.data.payload;
             if (typeof callback === 'function') {callback(response.data);};
             cachingService.getPayload(response.data, _this.setID);
+            console.log('MAKING API CALL', storageID);
           }, function erroneusHTTP(response) {
             message = response;
           });
         }else {
-          console.log('LOCAL STORAGE HAS A PAYLOAD');
+          console.log('GETTING DATA FROM LOCAL STORAGE INSTEAD');
           try {
-            var data = JSON.parse(window.localStorage[_this.setID]);
-            
+            var data = JSON.parse(window.localStorage[storageID]);
+            console.log('THE STORAGE ID FROM HTTP', ':', storageID);
             if (typeof callback === 'function') {
               callback(data);
             };
-            console.log('CACHED DATA', data);
           }catch(e){
             //error
-            console.log('There was an error');
+            console.log('There was an error', e);
           }
-          
-          
-          //console.log('Local Storage', data);
-          //if (typeof callback === 'function' && window.localStorage.hasOwnProperty(_this.setId)) {callback(data);};
-            
-          console.log('KEY', typeof data === "undefined");
         }
       },
       setStorageID: function (id) {
         this.setID = id;
-        console.log('SETTING STORAGE ID', this.setID);
+        console.log('SETTING STORAGE ID', this);
       }
     };
-    //console.log('OPTIONS OBJ', options);
     return {
       options: options
     };

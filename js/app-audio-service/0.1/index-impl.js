@@ -18,8 +18,20 @@ define(function () {
         bdy[0].appendChild(audio);
         AppAudioObject.prototype.playAll(audio, data);
       },
-      getData: function (url, scope, callback) {
-        httpService.options.getData(url, scope, callback);
+      //Expose httpService methods via these wrappers
+    
+      /*
+       * @param url: String
+       * @param scope: Object
+       * @param storageID: String
+       * @param callback: Function
+       */
+      getData: function (url, scope, storageID, callback) {
+        httpService.options.getData(url, scope, storageID, callback);
+      },
+      setStorageID: function (id) {
+        console.log('APP AUDIO ID', id);
+        httpService.options.setStorageID(id);
       },
       createAudio: function () {
         var audioTag = document.createElement('AUDIO');
@@ -65,6 +77,7 @@ define(function () {
     return {
       init: AppAudioObject.prototype.init,
       getData: AppAudioObject.prototype.getData,
+      setStorageID: AppAudioObject.prototype.setStorageID,
       play: AppAudioObject.prototype.play,
       pause: AppAudioObject.prototype.pause,
       stop: AppAudioObject.prototype.stop,

@@ -35,20 +35,26 @@ define([
 			compile: function () {
 				return {
 					post: function (scope, element, attrs, ctrl, $timeout) {
-					  ctrl.getData(scope, function (data) {
+					  
+					  /*
+             * pass in scope and the controller ID for use with the caching service
+             * If no ID is specified, pass in an empty string 
+             */
+					  ctrl.getData(scope, ctrl.storageID, function (data) {
 					    var idx = 0;
 					    var defer = ctrl.q.defer();
 					    var rightCtrl = document.getElementById('right');
-
+              ctrl.setStorageID();
+              
 					    function setCtrlData() {
 					      ctrl.data = data.payload.event[idx];
                 ctrl.apiData = data.payload.event;
 					    }
-
+              
 					    function initListeners() {
 					      ctrl.timeout(function () {
 					      	if (ctrl.autoPlay === 'true') {
-					      		console.log('YESS ITS TRUE', ctrl.timerService);
+					      		console.log('YES ITS TRUE', ctrl.timerService);
 					      		ctrl.timerService.init(3000, 'next', ctrl.slideRight, scope, ctrl.timeout, rightCtrl);
 					      	}
                   var slideWrap = document.getElementById(attrs.slideWrap) || document.querySelector('.'+attrs.slideWrap); //Get the value set in the directive element's slide-wrap attribute
@@ -70,7 +76,6 @@ define([
                     idx < ((data.payload.event.length)-1)  ? idx+=1 : ((data.payload.event.length)-1);
                     ctrl.slideDistanceValue = (-stWidth*idx); //Setting this value here directly updates the bound CSS, allowing the slides to animate to the right
                     angular.element(slideWrap).addClass('slide');
-                    //console.log('Hitting next', idx);
                   });
                 }, 0);
 					    }
@@ -109,10 +114,14 @@ define([
 		_this.slideDistanceValue = '';
 		_this.q = $q;
 		_this.timerService = timerService;
+		_this.storageID = 'slider';
 
-		_this.getData = function (scope, callback) {
-		  sliderService.getData(apiURL, scope, callback); //Get some data
+		_this.getData = function (scope, storageID, callback) {
+		  sliderService.getData(apiURL, scope, _this.storageID,  callback); //Get some data
 		};
+		_this.setStorageID = function () {
+      sliderService.setStorageID(_this.storageID);
+    };
 		_this.slideLeft = function () {
 		  _this.eventService.emit('prev');
 		};

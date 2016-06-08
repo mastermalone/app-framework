@@ -2,13 +2,25 @@ define(function () {
   'use strict';
   
   return function SliderFactory(http, httpService) {
-    //console.log('SLIDER SERVICE');
-    function getData(url, scope, callback) {
-      httpService.options.getData(url, scope, callback);
+    //Expose httpService methods via these wrappers
+    
+    /*
+     * @param url: String
+     * @param scope: Object
+     * @param storageID: String
+     * @param callback: Function
+     */
+    function getData(url, scope, storageID, callback) {
+      httpService.options.getData(url, scope, storageID, callback);
+    }
+    
+    function setStorageID(id) {
+      httpService.options.setStorageID(id);
     }
     
     return {
-      getData: getData
+      getData: getData,
+      setStorageID: setStorageID
     };
   };
 });

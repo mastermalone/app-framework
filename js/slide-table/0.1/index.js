@@ -13,7 +13,7 @@ define([
   'event-service',
   'slide-table-service',
   'css-transition-service',
-  'caching-service'
+  //'caching-service'
   ],
   function (app, slidehtml, slidecss, emitter) {
   'use strict';
@@ -36,10 +36,14 @@ define([
         return {
           post: function (scope, element, attrs, ctrl) {
             var desc = document.getElementById(ctrl.animate) || document.querySelector('.'+ctrl.animate);
-
-            ctrl.setStorageID(ctrl.storageID);//Used to set the key name for the caching service localStorage object
-            ctrl.getData(ctrl, function (data) {
+            
+            /*
+             * pass in scope and the controller ID for use with the caching service
+             * If no id is specified, pass in an empty string 
+             */           
+            ctrl.getData(ctrl, ctrl.storageID, function (data) {
               var idx = 0;
+              ctrl.setStorageID();//Used to set the key name for the caching service localStorage object
               console.log('SLIDE TABLE DATA', data);
               ctrl.data = data.payload.event[idx];
               angular.element(desc).addClass('fadein');
@@ -94,13 +98,12 @@ define([
     _this.transitionEnd = cssTransition.transitionEnd();
 
     //Pass in the scope object, which is bound to the directive's isolate scope
-    _this.getData = function (scope, callback, storageID) {
-
-      //console.log('THE ARGS', arguments);
-      slideTableService.getData(apiURL, scope, callback, storageID);
+    _this.getData = function (scope, storageID, callback) {
+      //This is a wrapper for the http-service getData method.
+      slideTableService.getData(apiURL, scope, _this.storageID, callback);
     };
-    _this.setStorageID = function (id) {
-      return slideTableService.setStorageID(id);
+    _this.setStorageID = function () {
+      slideTableService.setStorageID(_this.storageID);
     };
   }]);
 });
