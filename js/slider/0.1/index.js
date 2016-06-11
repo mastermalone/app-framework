@@ -55,7 +55,7 @@ define([
 					      ctrl.timeout(function () {
 					      	if (ctrl.autoPlay === 'true') {
 					      		console.log('YES ITS TRUE', ctrl.timerService);
-					      		ctrl.timerService.init(3000, 'next', ctrl.slideRight, scope, ctrl.timeout, rightCtrl);
+					      		ctrl.timerService.init(ctrl.slideTime, 'next', ctrl.slideRight, scope, ctrl.timeout, rightCtrl);
 					      	}
                   var slideWrap = document.getElementById(attrs.slideWrap) || document.querySelector('.'+attrs.slideWrap); //Get the value set in the directive element's slide-wrap attribute
                   var slideTab = document.getElementById(attrs.slideTabs) || document.querySelector('.'+attrs.slideTabs); //Get the value set in the directive element's slide-tab attribute
@@ -63,7 +63,8 @@ define([
                   ctrl.totalSlidesLength = (slideTab.offsetWidth*ctrl.apiData.length); //Calculated width of all slides
 
                   ctrl.eventService.on('prev', function () {
-                  	//ctrl.timerService.clearTimer();
+                  	ctrl.timerService.clearTimer();
+                  	ctrl.timerService.init(ctrl.slideTime, 'next', ctrl.slideRight, scope, ctrl.timeout, rightCtrl);
                     idx !== 0 ? idx-=1 : 0;
                     idx !== 0 ? ctrl.slideDistanceValue += stWidth : ctrl.slideDistanceValue = 0; //Setting this value here directly updates the bound CSS, allowing the slides to animate to the left
                   });
@@ -72,7 +73,8 @@ define([
                   	if (idx >= ((data.payload['event'].length)-1)) {
 		                 	idx = -1;
 		                }
-                  	//ctrl.timerService.clearTimer();
+                  	ctrl.timerService.clearTimer();
+                  	ctrl.timerService.init(3000, 'next', ctrl.slideRight, scope, ctrl.timeout, rightCtrl);
                     idx < ((data.payload.event.length)-1)  ? idx+=1 : ((data.payload.event.length)-1);
                     ctrl.slideDistanceValue = (-stWidth*idx); //Setting this value here directly updates the bound CSS, allowing the slides to animate to the right
                     angular.element(slideWrap).addClass('slide');
@@ -84,6 +86,12 @@ define([
               .then(setCtrlData)
               .then(initListeners);
               defer.resolve();
+              
+              scope.$on('$destroy', function () {
+                console.log('It was DESTROYED!', element);
+                ctrl.timerService.clearTimer();
+                element.remove();
+              });
 					  });
 					}
 				};
@@ -114,6 +122,7 @@ define([
 		_this.slideDistanceValue = '';
 		_this.q = $q;
 		_this.timerService = timerService;
+		_this.slideTime = 3000;
 		_this.storageID = 'slider';
 
 		_this.getData = function (scope, storageID, callback) {

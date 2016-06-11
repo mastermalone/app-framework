@@ -68,6 +68,11 @@ define([
                 });
               });
             });
+            
+            scope.$on('$destroy', function () {
+              console.log('It was DESTROYED!', element);
+              element.remove();
+            });
           }
         };
       }

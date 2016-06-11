@@ -1,9 +1,12 @@
 define(function () {
 	'use strict';
-
+  
+  var tmr = '';
+  
 	return function TimerFactory(eventService) {
 
 		function TimerService(interval) {
+		  var tmr = '';
 			this.interval = interval;
 		}
 
@@ -19,10 +22,9 @@ define(function () {
 				TimerService.prototype.startTimer(interval, callback);
 			},
 			startTimer: function (interval, callback) {
-				console.log('TIMER SERVICE', this, interval);
+				//console.log('TIMER SERVICE', this, interval);
 				TimerService.prototype.callback = callback;
-				TimerService.prototype.tmr = setInterval(this.emitOnInterval, interval);
-				//TimerService.prototype.tmr = setInterval('this.callback()', interval);
+				tmr = setInterval(this.emitOnInterval, interval);
 
 				TimerService.prototype.eventService = eventService;
 			},
@@ -33,8 +35,8 @@ define(function () {
 		    }, 0);
 			},
 			clearTimer: function () {
-				console.log('ATTEMPTING TO CLEAR', this);
-				clearInterval(TimerService.prototype.tmr);
+				//console.log('ATTEMPTING TO CLEAR', tmr);
+				clearInterval(tmr);
 			}
 		};
 
