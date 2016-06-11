@@ -51,6 +51,11 @@ define([
                 ctrl.apiData = data.payload.event;
 					    }
               
+              function timerSet() {
+                ctrl.timerService.clearTimer();
+                ctrl.timerService.init(ctrl.slideTime, 'next', ctrl.slideRight, scope, ctrl.timeout, rightCtrl);
+              }
+              
 					    function initListeners() {
 					      ctrl.timeout(function () {
 					      	if (ctrl.autoPlay === 'true') {
@@ -63,8 +68,7 @@ define([
                   ctrl.totalSlidesLength = (slideTab.offsetWidth*ctrl.apiData.length); //Calculated width of all slides
 
                   ctrl.eventService.on('prev', function () {
-                  	ctrl.timerService.clearTimer();
-                  	ctrl.timerService.init(ctrl.slideTime, 'next', ctrl.slideRight, scope, ctrl.timeout, rightCtrl);
+                  	timerSet();
                     idx !== 0 ? idx-=1 : 0;
                     idx !== 0 ? ctrl.slideDistanceValue += stWidth : ctrl.slideDistanceValue = 0; //Setting this value here directly updates the bound CSS, allowing the slides to animate to the left
                   });
@@ -73,8 +77,7 @@ define([
                   	if (idx >= ((data.payload['event'].length)-1)) {
 		                 	idx = -1;
 		                }
-                  	ctrl.timerService.clearTimer();
-                  	ctrl.timerService.init(3000, 'next', ctrl.slideRight, scope, ctrl.timeout, rightCtrl);
+                  	timerSet();
                     idx < ((data.payload.event.length)-1)  ? idx+=1 : ((data.payload.event.length)-1);
                     ctrl.slideDistanceValue = (-stWidth*idx); //Setting this value here directly updates the bound CSS, allowing the slides to animate to the right
                     angular.element(slideWrap).addClass('slide');
