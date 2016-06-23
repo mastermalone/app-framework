@@ -5,6 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo the test works",
+    "app_cache": "node server-scripts/caching/caching.js",
+    "test_app_cache": "node node_modules/appcache-node/test.js",
     "start": "node start-server.js"
   },
   "keywords": [
@@ -14,13 +16,16 @@
   "author": "mastermalone",
   "license": "ISC",
   "devDependencies": {
+    "appcache-node": "^0.2.0",
     "connect": "^3.4.0",
     "livereload": "^0.4.1",
+    "node-appcache-generator": "0.0.2",
     "requirejs-text": "^2.0.12",
     "serve-static": "^1.10.0",
     "vhost": "^3.0.1"
   },
   "dependencies": {
-    "eventemitter2": "~1.0.0"
+    "eventemitter2": "~1.0.0",
+    "shelljs": "^0.7.0"
   }
 }
