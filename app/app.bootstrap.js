@@ -15,7 +15,8 @@ require.config({
         'http-service': '/js/http-service/0.1/index',
         'app-audio-service': '/js/app-audio-service/0.1/index',
         'caching-service': '/js/caching-service/0.1/index',
-        'text': '/lib/text'
+        'text': '/lib/text',
+        'serivice-worker-service': '/js/service-worker-service/0.1/index'
     },
     shim: {
         'angular': {
@@ -47,6 +48,7 @@ require.config({
 
 require([
   'domready',
+  'serivice-worker-service',
   'text',
   'app-init',
   'slide-table-service',
@@ -55,8 +57,9 @@ require([
   'http-service',
   'app-audio-service',
   'caching-service'],
-  function (domready) {
-
+  function (domready, serviceWorker) {
+    
+    //serviceWorker.init();
     domready(function(){
         angular.element(document).find('html').attr('ng-app', 'app');
         angular.bootstrap(document, ['app']);
