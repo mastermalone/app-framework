@@ -7,6 +7,5 @@ require.config({
 define(['app', 'service-worker-impl'], function (app, serviceWorkerImpl) {
   'use strict';
   
-  console.log('THIS IS THE SERVICE INDEX', serviceWorkerImpl);
   app.registerFactory('serviceWorker', [serviceWorkerImpl]);
 });

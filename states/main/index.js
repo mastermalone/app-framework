@@ -9,7 +9,7 @@ define([
     //This page has a template that is determined via the ui-router
     console.log('From main/index.js: loaded 3rd, since this is the main page.');
     
-    app.registerDirective('mainPageDirective', [function () {
+    app.registerDirective('mainPage', [function () {
       return {
         restrict: 'AE',
         scope: {},
@@ -18,6 +18,7 @@ define([
         bindToController: true,
         link: function (scope, element, attrs, ctrl) {
           ctrl.initServiceWorker();
+          alert('HOPE THIS FIRES');
         }
       };
     }]);

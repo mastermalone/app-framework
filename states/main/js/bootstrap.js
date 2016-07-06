@@ -1,4 +1,4 @@
-require.config({
+/*require.config({
     paths: {
         'app': '../app/app',
         //'main': '../states/main/index',
@@ -10,9 +10,11 @@ require.config({
 
 require([
   'app', 
-  /*'main',*/ 
   'slider-service', 
   'css-transition-service'], 
   function (app) {
     console.log('loading main page:  Loads 4th');
 });
+*/
+
+//Not used

@@ -48,6 +48,7 @@ require.config({
 
 require([
   'domready',
+  'app',
   'serivice-worker-service',
   'text',
   'app-init',
@@ -57,11 +58,24 @@ require([
   'http-service',
   'app-audio-service',
   'caching-service'],
-  function (domready, serviceWorker) {
+  function (domready, app) {
     
-    //serviceWorker.init();
+    app.registerController('appController', ['serviceWorker', function (serviceWorker) {
+      var _this = this;
+      
+      _this.init = function init() {
+        _this.callServiceWorker();
+      };
+      
+      _this.callServiceWorker = function callServiceWorker() {
+        serviceWorker.init();
+      };
+      
+      _this.init();
+    }]);
+    
     domready(function(){
-        angular.element(document).find('html').attr('ng-app', 'app');
+        angular.element(document).find('html').attr('ng-app', 'app').attr('ng-controller', 'appController');
         angular.bootstrap(document, ['app']);
         console.log('DOM ready, app.bootstrap: Loads 8th');
     });
