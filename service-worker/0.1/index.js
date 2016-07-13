@@ -1,4 +1,4 @@
-this.addEventListener('install', function(event) {
+/*this.addEventListener('install', function(event) {
   event.waitUntil(
     caches.open('v1').then(function(cache) {
       return cache.addAll([
@@ -28,5 +28,31 @@ this.addEventListener('fetch', function(event) {
     return response.clone();
   }).catch(function() {
     return caches.match('/sw-test/gallery/myLittleVader.jpg');
+  }));
+});
+*/
+
+this.addEventListener('install', function install(evt) {
+  evt.waitUntil(caches.open('vi').then(function addCache() {
+    return cache.addAll([
+      
+    ]);
+  }));
+});
+
+
+this.addEventLsitener('fetch', function fetch(evt) {
+  var response;
+  evt.respondWith(caches.match(evt.request).catch(function catchRequest() {
+    return fetch(evt.request);
+  }).then(function getResponse (resp) {
+    response = resp;
+    caches.open('v1').then(function returnCloneCache(cache) {
+      cache.put(evt.request, response);
+    });
+    return response.clone;
+  }).catch(function () {
+    //return caches.match TODO
+    console.log('Something went wrong in the getResponse catch');
   }));
 });

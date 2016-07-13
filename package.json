@@ -18,8 +18,10 @@
   "devDependencies": {
     "appcache-node": "^0.2.0",
     "connect": "^3.4.0",
+    "https-proxied": "0.0.5",
     "livereload": "^0.4.1",
     "node-appcache-generator": "0.0.2",
+    "pem": "^1.8.3",
     "requirejs-text": "^2.0.12",
     "serve-static": "^1.10.0",
     "uglify-js": "^2.7.0",
