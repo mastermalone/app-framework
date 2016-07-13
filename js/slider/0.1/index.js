@@ -26,7 +26,8 @@ define([
 			  api: '@',
 			  slideWrap: '@',
 			  slideTabs: '@',
-			  autoPlay: '@'
+			  autoPlay: '@',
+			  hideControls: '=?' //This is optional.  The equals makes it a true boolean
 			},
 			template: slidehtml,
 			controller: 'SildeController',
@@ -36,6 +37,7 @@ define([
 				return {
 					post: function (scope, element, attrs, ctrl, $timeout) {
 					  
+					  console.log('VALUE OF SHOW CONTROLS', ctrl.hideControls);
 					  /*
              * pass in scope and the controller ID for use with the caching service
              * If no ID is specified, pass in an empty string 

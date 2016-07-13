@@ -22,6 +22,7 @@
     "node-appcache-generator": "0.0.2",
     "requirejs-text": "^2.0.12",
     "serve-static": "^1.10.0",
+    "uglify-js": "^2.7.0",
     "vhost": "^3.0.1"
   },
   "dependencies": {

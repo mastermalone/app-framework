@@ -8,5 +8,9 @@
             "localhost": "/localhost:4001/webservicemocks/event-data/0.1/index.json",
             'tracklist': "/localhost:4001/webservicemocks/track-list/0.1/index.json"
         }
+        "api_endpoints" {
+            "localhost": "/localhost:4001/webservicemocks/event-data/0.1/index.json",
+            'tracklist': "/localhost:4001/webservicemocks/track-list/0.1/index.json"
+        }
     }
 }
