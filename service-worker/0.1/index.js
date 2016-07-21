@@ -35,13 +35,14 @@ this.addEventListener('fetch', function(event) {
 this.addEventListener('install', function install(evt) {
   evt.waitUntil(caches.open('vi').then(function addCache() {
     return cache.addAll([
-      
+      'michaelmalone-member.test.abcmouse.com/',
+      'michaelmalone-member.test.abcmouse.com/index.html',
     ]);
   }));
 });
 
 
-this.addEventLsitener('fetch', function fetch(evt) {
+this.addEventListener('fetch', function fetch(evt) {
   var response;
   evt.respondWith(caches.match(evt.request).catch(function catchRequest() {
     return fetch(evt.request);
