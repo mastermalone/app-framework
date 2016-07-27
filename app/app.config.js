@@ -8,7 +8,9 @@ define(['app', 'app-routes'], function (app) {
         $stateProvider
             .state('main', {
                 url: '/main',
-                templateUrl: 'states/main/index.html'
+                templateUrl: 'states/main/index.html',
+                controller: 'mainPageController',
+                controllerAs: 'mpc'
             })
             .state('home', {
                 url: '/home',
