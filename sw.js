@@ -1,7 +1,7 @@
 var CacheVersion = {
   ver1: 'v1',
   ver2: 'v2'
-}
+};
 
 var CacheFiles = {
   files1: [
@@ -14,21 +14,49 @@ var CacheFiles = {
     '/app/app.bootstrap.js',
     '/images/beer-day.jpg',
     '/images/game-day.jpg',
-    '/images/gift-day.jpg',
+    '/images/gift-day2.jpg',
     '/images/home-improvement.jpg',
     '/images/workout-buddy.jpeg',
     '/js/bootstrap.js',
+    '/js/app-audio/0.1/index.js',
     '/js/app-audio-service/0.1/index.js',
     '/js/app-audio-service/0.1/index-impl.js',
+    '/js/auto-complete/index.css',
+    '/js/auto-complete/index.html',
+    '/js/auto-complete/index.js',
     '/js/slide-table/0.1/index.js',
-    '/js/slide-table/0.1/index.html',
     '/js/slide-table/0.1/index.css',
+    '/js/slide-table/0.1/index.html',
+    '/js/slide-table/0.1/slide-table-service/0.1/index.js',
+    '/js/slide-table/0.1/slide-table-service/0.1/index-impl.js',
+    '/js/caching-service/0.1/index.js',
+    '/js/caching-service/0.1/index-impl.js',
+    '/js/css-transition-service/0.1/index.js',
+    '/js/css-transition-service/0.1/index-impl.js',
+    '/js/event-service/0.1/index.js',
+    '/js/event-service/0.1/index-impl.js',
+    '/js/http-service/0.1/index.js',
+    '/js/http-service/0.1/index-impl.js',
+    '/js/service-worker-service/0.1/index.js',
+    '/js/service-worker-service/0.1/index-impl.js',
+    '/js/side-pannel/0.1/index.css',
+    '/js/side-pannel/0.1/index.html',
+    '/js/side-pannel/0.1/index.js',
+    '/js/timer-service/0.1/index.js',
+    '/js/timer-service/0.1/index-impl.js',
+    '/js/slider/0.1/index.html',
+    '/js/slider/0.1/index.js',
+    '/js/slider/0.1/index.css',
+    '/js/slider/0.1/slider-service/0.1/index.js',
+    '/js/slider/0.1/slider-service/0.1/index-impl.js',
     '/lib/require.js',
+    '/lib/text.js',
     '/lib/angular.js',
     '/lib/domReady.js',
     '/lib/angular-couch-potato.js',
     '/lib/angular-ui-router.min.js',
     '/lib/angular.min.js',
+    '/lib/eventemitter2.js',
     '/states/main/index.js',
     '/states/main/index.html',
     '/index.css',
@@ -72,22 +100,23 @@ var ServiceWorkerObj = {
             console.log('Deleting old cache from:', theCacheName);
             return caches.delete(theCacheName);
           }
-        }))
+        }));
       }));
     });
   },
   fetch: function fetch(swgs) {
     swgs.addEventListener('fetch', function fetch(evt) {
       if (evt.respondWith) {
-        console.log('Whats passed into respond width', evt.request);
+        console.log('Whats passed into respond with as the request', evt.request);
         evt.respondWith(caches.match(evt.request).catch(function() {
-          console.log('Whats happening in the first catch?');
+          console.log('FIRST CATCH OF fetch evt.respondWith');
           return fetch(evt.request);
         }).then(function getResponse(resp) {
           console.log('[ServiceWorker]: Found in cache', evt.request.url);
           console.log('Value of evt', evt);
+          console.log('Value of resp', resp);
           if (resp) {
-            return resp
+            return resp;
           }
           return fetch(evt.request).then(function(resp){
             caches.open(CacheVersion.ver2).then(function returnCloneCache(cache) {
@@ -113,6 +142,6 @@ var ServiceWorkerObj = {
       }
     });
   }
-}
+};
 
 ServiceWorkerObj.init(this);
