@@ -5,8 +5,11 @@ define([], function () {
   return function ServiceWorkerFactory() {
     var ServiceWorker = {
       init: function init() {
-        console.log('Service Worker is running');
-        this.register();
+        
+        this.setLocalStorageKeyToEnagbleServiceWorker();
+        this.enableServiceWorker();
+        console.log('Service Worker is running',  this.enableServiceWorker());
+        //this.register();
       },
       register: function register() {
         if ('serviceWorker' in navigator) {
@@ -23,12 +26,29 @@ define([], function () {
         }else {
           console.log('NO SERVICE WORKER AVAILBLE');
         }
+      },
+      setLocalStorageKeyToEnagbleServiceWorker: function setLSKeyForSW(val) {
+        if (window.localStorage.hasOwnProperty('enableServiceWorker')) {
+          return;
+        }else {
+          val = val || '';
+          window.localStorage.setItem('enableServiceWorker', val);
+        }
+      },
+      enableServiceWorker: function enable() {
+        var ls = window.localStorage;
+        var enable = ls.hasOwnProperty('enableServiceWorker') ? ls.enableServiceWorker : false;
+        
+        console.log('ENABLE SERVICE WORKER', ls.enableServiceWorker);
+        return ls.enableServiceWorker;
       }
     };
     
     return {
       init: ServiceWorker.init,
-      register: ServiceWorker.register
+      register: ServiceWorker.register,
+      setLocalStorageKeyToEnagbleServiceWorker: ServiceWorker.setLocalStorageKeyToEnagbleServiceWorker,
+      enableServiceWorker: ServiceWorker.enableServiceWorker,
     };
   };
 });

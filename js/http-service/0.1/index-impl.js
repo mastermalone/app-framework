@@ -18,11 +18,11 @@ define(function () {
         console.log('CHECK LOCAL STORAGE RESULT', storageID);        
         console.log('ACCORING TO HTTP, LOCAL STORAGE HAS DATA?:', _this.checkLocalStorage(storageID));  
         
-        if (typeof storageID !== 'string' && storageID !== '') {
+        if (typeof storageID !== 'string') {
           console.log('You did not specify the ID of the controller for caching the API response.  Please set _this.storageID in your controller.');
           return;
         }      
-        if (_this.checkLocalStorage(storageID) === false) {
+        if (!_this.checkLocalStorage(storageID)) {
           http({
             method: 'GET',
             url: url,

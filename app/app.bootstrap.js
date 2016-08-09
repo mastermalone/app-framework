@@ -65,13 +65,9 @@ require([
       
       _this.init = function init() {
         console.log('What is the $element?: ', $element);
-        _this.callServiceWorker();
-      };
-      
-      _this.callServiceWorker = function callServiceWorker() {
         serviceWorker.init();
       };
-      
+            
       _this.init();
     }]);
     

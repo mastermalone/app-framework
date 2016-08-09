@@ -12,8 +12,7 @@ define([
   'emitter',
   'event-service',
   'slide-table-service',
-  'css-transition-service',
-  //'caching-service'
+  'css-transition-service'
   ],
   function (app, slidehtml, slidecss, emitter) {
   'use strict';
