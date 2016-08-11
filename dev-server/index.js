@@ -16,13 +16,15 @@ module.exports.server = (function () {
           var pem = require('pem');
           var serve = svStatic('./');
           var liverelaod = require('livereload');
+          var path = require('path');
           
           //this is for the site
           var siteApp = connect();
           //This is the main server used for routing
           var mainApp = connect(); 
           
-          siteApp.use(svStatic('./', {index:['index.html']}));
+          //siteApp.use(svStatic('./', {index:['index.html']}));
+          siteApp.use(svStatic(path.join(__dirname, '/../'), {index:['index.html']}));
           mainApp.use(vhost(domainX, siteApp));
           
           //app.use(vhost('member.localhost.cn', siteApp));
