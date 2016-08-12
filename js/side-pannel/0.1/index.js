@@ -27,9 +27,8 @@ define(['app', 'text!sidecss', 'text!sidehtml'], function (app, spcss, sphtml) {
           post: function () {
             /*
             element.find('#'+scope.slideTabId).on('click', function toggleSlider(e) {
-                          console.log('toggling slider');
-                        });*/
-            
+              console.log('toggling slider');
+            });*/
           }
         };
       }

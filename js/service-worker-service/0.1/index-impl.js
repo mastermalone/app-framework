@@ -2,32 +2,39 @@ define([], function () {
   'use strict';
   
   
-  return function ServiceWorkerFactory() {
+  return function ServiceWorkerFactory(promise) {
     var ServiceWorker = {
       init: function init() {
-        
         this.setLocalStorageKeyToEnagbleServiceWorker();
         this.enableServiceWorker();
-        console.log('Service Worker is running',  this.enableServiceWorker());
-        //this.register();
+        this.register();
+        console.log('Service Worker is running');
       },
       register: function register() {
+        var _this = this;
+        
         if ('serviceWorker' in navigator) {
-          console.log('WE HAVE SERVICE WORKERS');
-          //Must include the full host name for local host 127.0.0.1/
-          console.log('Hostname ', window.location.hostname);
-          //navigator.serviceWorker.register('/service-worker/0.1/index.js').then(function (reg) {
+          console.log('SERVICE WORKERS AVAILABLE');
           navigator.serviceWorker.register('/sw.js', {'scope': './'})
           .then(function (reg) {
             console.log('Registration succeeded, Scope is ', reg.scope);
+            console.log('_this.enableServiceWorker ', _this.enableServiceWorker());
+            !_this.enableServiceWorker() ? _this.unregister(reg) : null;
           }).catch(function (error) {
             console.log('There was an error during regsitration:', error);
           });
         }else {
-          console.log('NO SERVICE WORKER AVAILBLE');
+          console.info('NO SERVICE WORKER AVAILBLE');
         }
       },
-      setLocalStorageKeyToEnagbleServiceWorker: function setLSKeyForSW(val) {
+      unregister: function (reg) {
+        reg.unregister()
+        .then(function (booleanVal) {
+          //unregister was successeful
+          console.info('UNREGISTERED the SW', booleanVal);
+        });
+      },
+      setLocalStorageKeyToEnagbleServiceWorker: function setLSKeyForSW(val) {        
         if (window.localStorage.hasOwnProperty('enableServiceWorker')) {
           return;
         }else {
@@ -37,16 +44,16 @@ define([], function () {
       },
       enableServiceWorker: function enable() {
         var ls = window.localStorage;
-        var enable = ls.hasOwnProperty('enableServiceWorker') ? ls.enableServiceWorker : false;
-        
-        console.log('ENABLE SERVICE WORKER', ls.enableServiceWorker);
-        return ls.enableServiceWorker;
+        var enable = ls['enableServiceWorker'] !== 'false' ? true : false;
+        console.log('ENABLE SW?: ', enable);
+        return enable;
       }
     };
     
     return {
       init: ServiceWorker.init,
       register: ServiceWorker.register,
+      unregister: ServiceWorker.unregister,
       setLocalStorageKeyToEnagbleServiceWorker: ServiceWorker.setLocalStorageKeyToEnagbleServiceWorker,
       enableServiceWorker: ServiceWorker.enableServiceWorker,
     };

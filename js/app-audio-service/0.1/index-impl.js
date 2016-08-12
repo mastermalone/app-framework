@@ -13,9 +13,6 @@ define(function () {
     AppAudioObject.prototype = {
       constructor: AppAudioObject,
       init: function (data) {
-        var audio = AppAudioObject.prototype.createAudio();
-        var bdy = document.getElementsByTagName('body');
-        bdy[0].appendChild(audio);
         AppAudioObject.prototype.playAll(audio, data);
       },
       //Expose httpService methods via these wrappers
@@ -32,10 +29,6 @@ define(function () {
       setStorageID: function (id) {
         console.log('APP AUDIO ID', id);
         httpService.options.setStorageID(id);
-      },
-      createAudio: function () {
-        var audioTag = document.createElement('AUDIO');
-        return audioTag;
       },
       play: function (audio) {
         audio.src = '../audio/ocean.mp3';
@@ -60,7 +53,6 @@ define(function () {
         console.log('Replaying audio');
       },
       playAll: function (audio, list) {
-        var frag = document.createDocumentFragment();
         var length = 2;
         var idx = 0;
         audio.src = list.payload.event[idx].file;

@@ -1,6 +1,6 @@
 define(function () {
     'use strict';
-    
+    //This is not needed.  TODO delete this file
     return function GetStateService (toState) {
       
       function getState (state) {
@@ -12,7 +12,4 @@ define(function () {
           getstate: getState
       };
     };
-    
-    //console.log('State to return', Getstate.currentState);
-    //return GetState;
 });

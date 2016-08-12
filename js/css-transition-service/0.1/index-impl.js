@@ -8,7 +8,7 @@ define(function(){
       CSSTransition.prototype = {
           constructor: CSSTransition,
           transitionEnd: function() {
-              var trans, elm, Transitions;
+              var elm, Transitions;
               elm = document.createElement('demo');
               Transitions = {
                   'transition': 'transitionend',

@@ -2,15 +2,15 @@
 define(function () {
   'use strict';
 
-  return function SlideTableFactory (http, httpService) {
+  return function SlideTableFactory (httpService) {
     var _this = this;
     //Expose httpService methods via these wrappers
     
     /*
-     * @param url: String
-     * @param scope: Object
-     * @param storageID: String
-     * @param callback: Function
+     * @param {String} url
+     * @param {Object} scope
+     * @param {String} storageID
+     * @param {function} callback
      */
     function getData(url, scope, storageID, callback) {
       //Injected service, httpService called

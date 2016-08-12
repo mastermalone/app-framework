@@ -13,6 +13,7 @@
       '/app/app-init.js',
       '/app/app.routes.js',
       '/app/app.bootstrap.js',
+      '/fallback/index.html',
       '/images/beer-day.jpg',
       '/images/game-day.jpg',
       '/images/gift-day2.jpg',
@@ -60,8 +61,10 @@
       '/lib/eventemitter2.js',
       '/states/main/index.js',
       '/states/about/index.js',
+      '/states/home/index.js',
       '/states/main/index.html',
       '/states/about/index.html',
+      '/states/home/index.html',
       '/index.css',
       '/index.html',
       '/main.config.js'
@@ -77,11 +80,8 @@
   
   var ServiceWorkerObj = {
     init: function init(swgs) {
-      //console.log('Value of the object this', this);
       this.install(swgs);
-      
       this.fetch(swgs);
-      
       this.activate(swgs);
     },
     cachedResources: function () {
@@ -91,23 +91,23 @@
     },
     install: function install(swgs) {
       swgs.addEventListener('install', function install(evt) {
-        console.log('Install complete');
+        console.info('[Service Worker] Install complete');
         
-         evt.waitUntil(caches.open(CacheVersion.ver2)
+         evt.waitUntil(caches.open(CacheVersion.ver1)
          .then(function createCache(cache) {
-           console.log('ServiceWorker is caching:', cache);
+           console.info('ServiceWorker is caching:');
            return cache.addAll(CacheFiles.files1);
          }));      
       });
     },
     activate: function activate(swgs) {
       swgs.addEventListener('activate', function activate(evt) {
-        console.log('[ServiceWorker actvated]');
+        console.info('[ServiceWorker actvated]');
         evt.waitUntil(caches.keys()
         .then(function deleteOldCache(cacheNames) {
           Promise.all(cacheNames.map(function mapCacheNames(theCacheName) {
-            if (theCacheName !== CacheVersion.ver2) {
-              console.log('Deleting old cache from:', theCacheName);
+            if (theCacheName !== CacheVersion.ver1) {
+              console.info('Deleting old cache from:', theCacheName);
               return caches.delete(theCacheName);
             }
           }));
@@ -115,46 +115,40 @@
       });
     },
     fetch: function fetchResp(swgs) {
+      var _this = this;
       swgs.addEventListener('fetch', function fetchEvent(evt) {
         if (evt.respondWith) {
-          //console.log('Whats passed into respond with as the request', evt.request);
-          evt.respondWith(caches.match(evt.request).catch(function() {
+          evt.respondWith(caches.match(evt.request)
+          .catch(function() {
             //If no cached version is found, fetch from the network
+            return evt.default();
+          })
+          .catch(function () {
+            //'It's failing so fetch here
             return fetch(evt.request).then(function (resp) {
-              console.log('---------------------------------------');
-              console.log('fetch:', resp);
               return resp;
             }, function (rej) {
-              console.log('===========================================');
-              console.log('fetch2:', rej);
+              console.info('fetch rejected due to:', rej);
             });
-          }).then(function getResponse(resp) {
-            console.log('[ServiceWorker]: Found in cache', evt.request.url);
-            //console.log('Value of evt', evt);
-            //console.log('Value of resp', resp);
-            if (resp) {
-              return resp;
-            }
-            return fetch(evt.request).then(function(resp){
-              caches.open(CacheVersion.ver2).then(function returnCloneCache(cache) {
-                console.log('time to do some fethcing an add to the cache', resp);
-                cache.put(evt.request, resp);
-              });
-              return resp;
-            });
-          }).catch(function (err) {  
+          })
+          .then(function getResponse(resp) {
+            console.info('[ServiceWorker]: Found in cache', evt.request.url);
+            return resp || _this.getContent(evt);
+          }).catch(function (err) {
+            console.info('Something went wrong during the fetch.  The file was not found in the cache...Fetching from the network for', evt.request.url);  
             
-            console.log('Something went wrong in the and the file was not found in the cache...Fetching from the network', typeof fetch);  
-            fetch(evt.request).then(function catchCacheResponseFaled(resp) {
-              console.log('Fetching in catch:', evt.request.url);
-              caches.open(CacheVersion.ver2).then(function returnCloneCache(cache) {
-                console.log('time to do some fethcing an add to the cache');
-                cache.put(evt.request, resp);
-              });
-              return resp;
-            });
+            _this.getContent(evt);
           }));
         }
+      });
+    },
+    getContent: function grabIt(evt) {
+      fetch(evt.request).then(function getContent(resp) {
+        caches.open(CacheVersion.ver1).then(function storeInCache(cache) {
+          console.info('time to do some fethcing an add to the cache');
+          cache.put(evt.request, resp);
+        });
+        return resp;
       });
     }
   };

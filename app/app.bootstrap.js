@@ -59,31 +59,19 @@ require([
   'app-audio-service',
   'caching-service'],
   function (domready, app) {
-    
+    //Temporary place for ServiceWorker
     app.registerController('appController', ['serviceWorker', '$element', function (serviceWorker, $element) {
       var _this = this;
       
       _this.init = function init() {
-        console.log('What is the $element?: ', $element);
         serviceWorker.init();
       };
             
       _this.init();
     }]);
     
-    //This can be removed because it was only a test to see how app.config applies a controller and assignes the value of $element
-    app.registerController('mainPageController', ['$scope', 'serviceWorker', '$element', '$compile', function ($scope, serviceWorer, $element, $compile) {
-      //Main Page controller
-      var _this = this;
-      _this.pageTitle = 'Custom Directives';
-      $scope.pageTitle = 'MAIN PAGE CONTROLLER';
-      console.log('THIS IS THE MAIN PAGE CTRL', $element);
-    }]);
-    
-    
     domready(function(){
         angular.element(document).find('html').attr('ng-app', 'app').attr('ng-controller', 'appController');
         angular.bootstrap(document, ['app']);
-        console.log('DOM ready, app.bootstrap: Loads 8th');
     });
 });

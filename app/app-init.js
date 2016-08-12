@@ -11,7 +11,7 @@ define(['app', 'app-config'], function (app) {
         app.lazy = $couchPotato;
         
         require(['./states/'+stateOnLoad+'/index']);
-        console.log('Value opf $stateParams:oads 7th', $stateParams,'AND STATE', stateOnLoad);
+        //console.log('Value opf $stateParams:oads 7th', $stateParams,'AND STATE', stateOnLoad);
 
         $rootScope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState, fromParams) {
           var currentState = '';

@@ -3,9 +3,9 @@ module.exports.server = (function () {
     
     var Server = {
         init: function (domain, port) {
-          const https = require('https');
-          const fs = require('fs');
-          const proxied = require('https-proxied');
+          var https = require('https');
+          var fs = require('fs');
+          var proxied = require('https-proxied');
           
           var portX = port || 3000;
           var domainX = domain || 'localhost';

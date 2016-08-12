@@ -1,6 +1,6 @@
 define(['angular', 'couch-potato', 'ui-router'], function (angular, couchPotato) {
     'use strict';
-    console.log('App is loaded:  Loaded 2nd', couchPotato);
+    //console.log('App is loaded:  Loaded 2nd', couchPotato);
     
     var app = angular.module('app', ['scs.couch-potato', 'ui.router']);
             

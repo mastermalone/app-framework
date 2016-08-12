@@ -7,5 +7,5 @@ require.config({
 define(['app', 'service-worker-impl'], function (app, serviceWorkerImpl) {
   'use strict';
   
-  app.registerFactory('serviceWorker', [serviceWorkerImpl]);
+  app.registerFactory('serviceWorker', ['$q', serviceWorkerImpl]);
 });

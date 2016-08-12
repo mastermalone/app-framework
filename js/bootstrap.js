@@ -23,5 +23,5 @@ require([
   'slider-service',
   'css-transition-service'],
   function (app) {
-    console.log('loading main page:  Loads 4th');
+    //Load app level dependencies
 });

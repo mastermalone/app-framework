@@ -8,5 +8,5 @@ require.config({
 define(['app', 'st-index-impl', 'http-service'], function (app, slideTFactory) {
   'use strict';
   //Inject your angular services here for use in your service, which is just a plain old JavaScript object
-  app.registerFactory('slideTableService', ['$http', 'httpService', slideTFactory]);
+  app.registerFactory('slideTableService', ['httpService', slideTFactory]);
 });
