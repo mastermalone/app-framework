@@ -111,7 +111,7 @@ define([
               
               scope.$on('$destroy', function () {
                 console.log('It was DESTROYED!', element);
-                ctrl.timerService.clearTimer();
+                timerService.clearTimer();
                 element.remove();
               });
             });
