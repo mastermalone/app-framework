@@ -1,8 +1,10 @@
 (function ServiceWorker() {
-    var CacheVersion = {
+  var CacheVersion = {
     ver1: 'v1',
     ver2: 'v2'
   };
+  
+  var appUrl = /localhost:3001/; //Only cache files from the app
   
   var CacheFiles = {
     files1: [
@@ -95,7 +97,7 @@
         
          evt.waitUntil(caches.open(CacheVersion.ver1)
          .then(function createCache(cache) {
-           console.info('ServiceWorker is caching:');
+           console.info('[ServiceWorker] is caching:');
            return cache.addAll(CacheFiles.files1);
          }));      
       });
@@ -116,8 +118,9 @@
     },
     fetch: function fetchResp(swgs) {
       var _this = this;
+      
       swgs.addEventListener('fetch', function fetchEvent(evt) {
-        if (evt.respondWith) {
+        if (evt.request.url.match(appUrl)) {
           evt.respondWith(caches.match(evt.request)
           .catch(function() {
             //If no cached version is found, fetch from the network
@@ -135,20 +138,31 @@
             console.info('[ServiceWorker]: Found in cache', evt.request.url);
             return resp || _this.getContent(evt);
           }).catch(function (err) {
-            console.info('Something went wrong during the fetch.  The file was not found in the cache...Fetching from the network for', evt.request.url);  
-            
+            console.info('Something went wrong during the fetch.  The file was not found in the cache...Fetching from the network for', evt.request.url);
             _this.getContent(evt);
           }));
         }
       });
     },
     getContent: function grabIt(evt) {
-      fetch(evt.request).then(function getContent(resp) {
-        caches.open(CacheVersion.ver1).then(function storeInCache(cache) {
-          console.info('time to do some fethcing an add to the cache');
-          cache.put(evt.request, resp);
-        });
-        return resp;
+      console.log('EVT', evt);
+      fetch(evt.request)
+      .then(function getContent(resp) {
+        if (resp.ok) {
+          console.log('FETCH response:', resp);
+          caches.open(CacheVersion.ver1).then(function storeInCache(cache) {
+            console.info('time to do some fethcing and add to the cache:', resp);
+            cache.put(evt.request, resp);
+          });
+          return resp;
+        }else {
+          console.log('In FALLBACK');
+          return caches.match(offlinePage.files[0]);
+        }
+      })
+      .catch(function fallBack() {
+        console.log('In FALLBACK');
+        return caches.match(offlinePage.files[0]);
       });
     }
   };

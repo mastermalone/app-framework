@@ -1,21 +1,34 @@
+/*
+ * Use:  include the service worker as a dependency and call init with your sw.js location and the scope
+ * that the service worker should control
+ * serviceWorker.init({
+    sw_path: '/sw.js',
+    scope: './'
+   });
+ */
+
 define([], function () {
   'use strict';
   
-  
   return function ServiceWorkerFactory(promise) {
     var ServiceWorker = {
-      init: function init() {
+      /*
+       * @param {Object} configObj : This object sets the path of the sw and it's scope.
+       */
+      init: function init(config) {
+        var configObj = config || {sw_path: '/sw.js', scope: './'}; //Set the sw path and it's scope
+        
         this.setLocalStorageKeyToEnagbleServiceWorker();
         this.enableServiceWorker();
-        this.register();
+        this.register(configObj);
         console.log('Service Worker is running');
       },
-      register: function register() {
+      register: function register(configObj) {
         var _this = this;
         
         if ('serviceWorker' in navigator) {
-          console.log('SERVICE WORKERS AVAILABLE');
-          navigator.serviceWorker.register('/sw.js', {'scope': './'})
+          console.log('SERVICE WORKERS AVAILABLE', configObj);
+          navigator.serviceWorker.register(configObj.sw_path, {'scope': configObj.scope})
           .then(function (reg) {
             console.log('Registration succeeded, Scope is ', reg.scope);
             console.log('_this.enableServiceWorker ', _this.enableServiceWorker());
@@ -50,7 +63,7 @@ define([], function () {
       }
     };
     
-    return {
+    return {  
       init: ServiceWorker.init,
       register: ServiceWorker.register,
       unregister: ServiceWorker.unregister,

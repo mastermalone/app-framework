@@ -64,7 +64,10 @@ require([
       var _this = this;
       
       _this.init = function init() {
-        serviceWorker.init();
+        serviceWorker.init({
+          sw_path: '/sw.js',
+          scope: './'
+        });
       };
             
       _this.init();

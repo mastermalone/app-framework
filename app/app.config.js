@@ -17,6 +17,10 @@ define(['app', 'app-routes'], function (app) {
             .state('about', {
                 url: '/about',
                 templateUrl: 'states/about/index.html'
+            })
+            .state('test', {
+                url: '/test',
+                templateUrl: 'states/test/index.html'
             });
         //$locationProvider.html5Mode(true);
     });
