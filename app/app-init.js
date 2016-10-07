@@ -10,7 +10,7 @@ define(['app', 'app-config'], function (app) {
         $rootScope.stateParames = $stateParams;
         app.lazy = $couchPotato;
         
-        require(['./states/'+stateOnLoad+'/index']);
+        //require(['./states/'+stateOnLoad+'/index']);
         //console.log('Value opf $stateParams:oads 7th', $stateParams,'AND STATE', stateOnLoad);
 
         $rootScope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState, fromParams) {
@@ -19,7 +19,7 @@ define(['app', 'app-config'], function (app) {
           $rootScope.toState = toState;
           currentState = $rootScope.toState.name;
           console.log('Loads 9th', $rootScope.toState.name);
-          require(['./states/'+stateOnLoad+'/index']);
+          //require(['./states/'+stateOnLoad+'/index']); //was a hack for loading the controller for the states
         });
                 
         // $rootScope.$on('$viewContentLoaded', function (evt, viewName, viewContent, param4) {

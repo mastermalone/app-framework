@@ -20,13 +20,13 @@ define(function () {
         name: 'about',
         url: '/about',
         templateUrl: 'states/about/index.html',
-        controller: 'AboutCOntroller'
+        controller: 'AboutController'
       },
       {
         name: 'test',
         url: '/test',
         templateUrl: 'states/test/index.html',
-        controller: 'AboutCOntroller'
+        controller: 'TestController'
       }
     ]
   };

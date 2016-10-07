@@ -6,6 +6,7 @@ require.config({
         'couch-potato': 'lib/angular-couch-potato',
         'ui-router': 'lib/angular-ui-router.min',
         'app': 'app/app',
+        'state-routes': 'js/config/state.routes',
         'app-config': 'app/app.config',
         'app-init': 'app/app-init',
         'app-routes': 'app/app.routes',

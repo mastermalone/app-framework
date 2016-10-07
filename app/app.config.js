@@ -1,27 +1,19 @@
-define(['app', 'app-routes'], function (app) {
+define(['app', 'state-routes', 'app-routes'], function (app, stateRoutes) {
     'use strict';
     
     //This should probably call app.routes
-    app.config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
-        $urlRouterProvider.otherwise('/main');
-        //console.log('Value of stateprovider: loads 6th');
-        $stateProvider
-            .state('main', {
-                url: '/main',
-                templateUrl: 'states/main/index.html'
-            })
-            .state('home', {
-                url: '/home',
-                templateUrl: 'states/home/index.html'
-            })
-            .state('about', {
-                url: '/about',
-                templateUrl: 'states/about/index.html'
-            })
-            .state('test', {
-                url: '/test',
-                templateUrl: 'states/test/index.html'
-            });
-        //$locationProvider.html5Mode(true);
-    });
+  app.config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
+    $urlRouterProvider.otherwise('/main');
+    
+    console.log('app-config load order', stateRoutes);
+    
+    for (var i = 0; i < stateRoutes.state.length; i++) {
+      console.log('stateRoutes:', stateRoutes.state[i].name);
+    
+      $stateProvider.state(stateRoutes.state[i].name, {
+        url: stateRoutes.state[i].url,
+        templateUrl: stateRoutes.state[i].templateUrl
+      });
+    }
+  });    
 });
