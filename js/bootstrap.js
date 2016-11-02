@@ -9,7 +9,20 @@ require.config({
         'slide-table-service': './js/slide-table/0.1/slide-table-service/0.1/index',
         'slider-service': './js/slider/0.1/slider-service/0.1/index',
         'css-transition-service': './js/css-transition-service/0.1/index',
-        'test-directive': './js/test-directive/0.1/index'
+        'test-directive': './js/test-directive/0.1/index',
+        'wave': './js/wave/0.1/index',
+        'wave-service': './js/wave/0.1/wave-service/0.1/index',
+        'wavesurfer': './lib/wavesurfer/wavesurfer.min',
+        'wavesurfer-timeline': './lib/wavesurfer/plugin/wavesurfer.timeline.min',
+    },
+    shim: {
+      'wavesurfer': {
+        exports: 'wavesurfer',
+      },
+      'wavesurfer-timeline': {
+        deps: ['wavesurfer'],
+        exports: 'wavesurfer-timeline'
+      }
     }
 });
 
@@ -23,4 +36,8 @@ require([
   'slide-table-service',
   'slider-service',
   'css-transition-service',
-  'test-directive']);
+  'test-directive',
+  'wave',
+  'wave-service',
+  'wavesurfer',
+  'wavesurfer-timeline']);

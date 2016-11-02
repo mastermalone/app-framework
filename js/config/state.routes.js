@@ -27,6 +27,12 @@ define(function () {
         url: '/test',
         templateUrl: 'states/test/index.html',
         controller: 'TestController'
+      },
+      {
+        name: 'wave_test',
+        url: '/wave_test',
+        templateUrl: 'states/wave_test/index.html',
+        controller: 'WaveTestController'
       }
     ]
   };
