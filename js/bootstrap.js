@@ -13,7 +13,7 @@ require.config({
         'wave': './js/wave/0.1/index',
         'wave-service': './js/wave/0.1/wave-service/0.1/index',
         'wavesurfer': './lib/wavesurfer/wavesurfer.min',
-        'wavesurfer-timeline': './lib/wavesurfer/plugin/wavesurfer.timeline.min',
+        'wavesurfer-timeline': './lib/wavesurfer/plugin/wavesurfer.timeline.min'
     },
     shim: {
       'wavesurfer': {

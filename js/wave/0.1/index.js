@@ -17,25 +17,37 @@ define([
     return {
       restrict: 'AE',
       scope: {
-        
+        audio: '@'
       },
       template: waveHtml,
       controller: 'WaveFormController',
       controllerAs: 'wfCtrl',
       bindToController: true,
-      link: function waveComplie(scope, element, attrs, ctrl) {
-        console.log('HERE IS THE WAVE ELEMENT:', element);
+      link: function waveCompile(scope, element, attrs, ctrl) {
         var params = {
           container: '#waveform',
           waveColor: 'violet',
-          progressColor: 'purple'
+          progressColor: 'purple',
+          backend: 'MediaElement',
+          renderer: 'MultiCanvas',
+          maxCanvasWidth: 900,
+          scrollParent: true
         };
         
-        var audioPath = '../audio/test_audio.mp3';
+        var waveActions = {
+          init: function initWave() {
+            ctrl.initWaveService(params, attrs.audio);
+          }
+        };    
+        console.log('WAVE DIRECTIVE ATTRIBUTES',attrs.audio);    
         
-        var wf = document.getElementById('waveForm');
+        waveActions.init();
+        //ctrl.initWaveService(params, attrs.audio);
         
-        ctrl.initWaveService(params, audioPath);
+        scope.$on('$destroy', function destroyed () {
+          console.log('Wave was DESTROYED!', element);
+          element.remove();
+        });
       }
     };
   }]);
