@@ -3,7 +3,7 @@ define(['wavesurfer', 'wavesurfer-timeline'], function waveModule (wavesurfer, w
   
   return function WaveFactory() {
     var waveService = {
-      init: function init(params, audioPath) {
+      init: function init(params, audioPath, controls) {
                 
         if (!params || !audioPath) {
           throw new Error('You have failed tp pass in the paramers needed for this wavesurfer service to work');
@@ -11,32 +11,23 @@ define(['wavesurfer', 'wavesurfer-timeline'], function waveModule (wavesurfer, w
         }
                 
         wavesurfer.init(params);
-        
         wavesurfer.on('ready', function () {
           wavesurfer.play();
         });
         wavesurfer.load(audioPath);
-        
-        waveService.createControls();
+        waveService.createControls(controls);
       },
-      createControls: function createControls() {
-        var playBtn = document.createElement('button');
-        var ZoomBtn = document.createElement('button');
-        var ZoomOutBtn = document.createElement('button');
+      createControls: function createControls(controls) {
+        //Normally no DOM manipulation in the service.  This is only for testing.
         var bdy = document.getElementsByTagName('body');
         
-        playBtn.innerHTML = 'Play/Pause Button';
-        playBtn.addEventListener('click', waveService.playPause, true);
-        
-        ZoomBtn.innerHTML = 'Zoom In';
-        ZoomBtn.addEventListener('click', waveService.zoomIn);
-        
-        ZoomOutBtn.innerHTML = 'Zoom Out';
-        ZoomOutBtn.addEventListener('click', waveService.zoomOut);
-        
-        bdy[0].appendChild(playBtn);
-        bdy[0].appendChild(ZoomBtn);
-        bdy[0].appendChild(ZoomOutBtn);
+        for (var i = 0; i < controls.elements.length; i++) {
+          console.log('The Calls', waveService[controls.elements[i].action]);
+          var btn = document.createElement('button');
+          btn.innerHTML = controls.elements[i].text;
+          btn.addEventListener('click', waveService[controls.elements[i].action], true);
+          bdy[0].appendChild(btn);
+        }
       },
       playPause: function playPause() {
         wavesurfer.playPause();
@@ -47,7 +38,6 @@ define(['wavesurfer', 'wavesurfer-timeline'], function waveModule (wavesurfer, w
           wavesurfer.zoom(waveService.zoomAmount);
         }
         console.log('Should be zooming in', waveService.zoomAmount);
-        //wavesurfer.zoom(1000);
       },
       zoomOut: function zoomOut() {
         if (waveService.zoomAmount > 0) {

@@ -34,15 +34,34 @@ define([
           scrollParent: true
         };
         
+        var controls = {
+          elements: [
+            {
+              tag: 'button',
+              text: 'Play/Pause Btn',
+              action: 'playPause'
+            },
+            {
+              tag: 'button',
+              text: 'Zoom In Btn',
+              action: 'zoomIn'
+            },
+            {
+              tag: 'button',
+              text: 'Zoom Out Btn',
+              action: 'zoomOut'
+            }
+          ]
+        };
+        
         var waveActions = {
           init: function initWave() {
-            ctrl.initWaveService(params, attrs.audio);
+            ctrl.initWaveService(params, attrs.audio, controls);
           }
         };    
         console.log('WAVE DIRECTIVE ATTRIBUTES',attrs.audio);    
         
         waveActions.init();
-        //ctrl.initWaveService(params, attrs.audio);
         
         scope.$on('$destroy', function destroyed () {
           console.log('Wave was DESTROYED!', element);
@@ -66,8 +85,8 @@ define([
       
       this.title = 'Wave Form';
       
-      this.initWaveService = function initWaveService(params, audioPath) {
-        waveService.init(params, audioPath);
+      this.initWaveService = function initWaveService(params, audioPath, controls) {
+        waveService.init(params, audioPath, controls);
       };
       
   }]);
