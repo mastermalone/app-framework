@@ -33,6 +33,12 @@ define(function () {
         url: '/wave_test',
         templateUrl: 'states/wave_test/index.html',
         controller: 'WaveTestController'
+      },
+      {
+        name: 'js_algo',
+        url: '/js_algo',
+        templateUrl: 'states/js_algo/index.html',
+        controller: 'jsAlgoController'
       }
     ]
   };

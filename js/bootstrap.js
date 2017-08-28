@@ -13,7 +13,9 @@ require.config({
         'wave': './js/wave/0.1/index',
         'wave-service': './js/wave/0.1/wave-service/0.1/index',
         'wavesurfer': './lib/wavesurfer/wavesurfer.min',
-        'wavesurfer-timeline': './lib/wavesurfer/plugin/wavesurfer.timeline.min'
+        'wavesurfer-timeline': './lib/wavesurfer/plugin/wavesurfer.timeline.min',
+        'js-algo': './js/js_algo/0.1/index',
+        'js-algo-service': './js/js_algo/0.1/js_algo_service/0.1/index'
     },
     shim: {
       'wavesurfer': {
@@ -40,4 +42,6 @@ require([
   'wave',
   'wave-service',
   'wavesurfer',
-  'wavesurfer-timeline']);
+  'wavesurfer-timeline',
+  'js-algo',
+  'js-algo-service']);
