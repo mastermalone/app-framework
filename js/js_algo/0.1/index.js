@@ -26,6 +26,8 @@ function jsAlgo(app, html, css) {
         ctrl.sum(6, [1, 2, 3, 4, 10, 11]);
         ctrl.bigSum(5, [1000000001, 1000000002, 1000000003, 1000000004, 1000000005]);
         ctrl.diagonalDifference(3);
+        ctrl.mergeSortedArray([2,4,6,8,10], [1,3,5,7,9]);
+        ctrl.reverseString('Hello Sir, can I help you?');
       }
     };
   }]);
@@ -55,6 +57,13 @@ function jsAlgo(app, html, css) {
       algoService.diagonalDifference(stdin);
     };
     
+    _this.mergeSortedArray = function mergeSortedArray(listA, listB) {
+      algoService.mergeSortedArray(listA, listB);
+    };
+    
+    _this.reverseString = function reverseString(str) {
+      algoService.reverseString(str);
+    };
+    
   }]);
-  
 });

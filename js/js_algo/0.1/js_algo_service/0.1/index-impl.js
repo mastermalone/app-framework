@@ -28,7 +28,7 @@ define([], function algoModule() {
         a1 !== b1 ? a1 > b1 ? _alice_score ++ : _bob_score ++ : _alice_score += 0, _bob_score +=0; 
         a2 !== b2 ? a2 > b2 ? _alice_score ++ : _bob_score ++ : _alice_score += 0, _bob_score +=0;
         
-        console.log('THE SCORE', _alice_score, _bob_score);
+        console.log('THE SCORE', _alice_score, _bob_score); 
       },
       sum: function sum(n, ar) {
          var sum = 0;
@@ -69,8 +69,8 @@ define([], function algoModule() {
         // read this: https://code.tutsplus.com/articles/data-structures-with-javascript-singly-linked-list-and-doubly-linked-list--cms-23392
         
         var merged = [];
-        var aELm = listA[0];
-        var bELm = listB[0];
+        var aElm = listA[0];
+        var bElm = listB[0];
         var i = 1;
         var j = 1;
         
@@ -81,16 +81,34 @@ define([], function algoModule() {
           return listA;
         }
         
-        while (aElm || bELm) {
-          if ((aELm && !bElm) || aELm < bELm) {
-            merged.push(aELm);
-            aELm = listA[i++];
+       while (aElm || bElm) {
+          if ((aElm && !bElm) || aElm < bElm) {
+            merged.push(aElm);
+            aElm = listA[i++];
           }else {
-            merged.push(bELm);
-            bELm = listB[i++];
+            merged.push(bElm);
+            bElm = listB[j++];
           }
         }
+        
+        console.log('MERGED: ', merged);
         return merged;
+      },
+      reverseString: function reverseString(str) {
+        var reversed = '';
+        var reversed2 = '';
+        var mappedReverse = [];
+        for (var i = str.length; i > 0; i--) {
+          reversed += str[i-1];
+        }
+        console.log('Reversed String:', reversed);
+        
+        reversed2 = str.split('');//Convert to Array
+        mappedReverse = reversed2.map(function reverseStringTest(item, idx, array) {
+          return array[(array.length-1)-idx];
+        }).join('');
+        
+        console.log('MAPPED REVERSE: ', mappedReverse);
       }
     };
     
@@ -101,7 +119,8 @@ define([], function algoModule() {
       sum: AlgoService.sum,
       bigSum: AlgoService.bigSum,
       diagonalDifference: AlgoService.diagonalDifference,
-      mergeSortedArray: AlgoService.mergeSortedArray
+      mergeSortedArray: AlgoService.mergeSortedArray,
+      reverseString: AlgoService.reverseString
     };
   };
 });
