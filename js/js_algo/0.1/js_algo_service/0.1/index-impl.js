@@ -64,9 +64,33 @@ define([], function algoModule() {
         
         console.log('DIAGONAL ARRAY', arr);
       },
-      linkedList: function linkedList() {
+      mergeSortedArray: function mergeSortedArray(listA, listB) {
         //watch this: https://youtu.be/9YddVVsdG5A
         // read this: https://code.tutsplus.com/articles/data-structures-with-javascript-singly-linked-list-and-doubly-linked-list--cms-23392
+        
+        var merged = [];
+        var aELm = listA[0];
+        var bELm = listB[0];
+        var i = 1;
+        var j = 1;
+        
+        if (listA.length === 0) {
+          return listB;
+        }
+        if (listB.length === 0) {
+          return listA;
+        }
+        
+        while (aElm || bELm) {
+          if ((aELm && !bElm) || aELm < bELm) {
+            merged.push(aELm);
+            aELm = listA[i++];
+          }else {
+            merged.push(bELm);
+            bELm = listB[i++];
+          }
+        }
+        return merged;
       }
     };
     
@@ -77,7 +101,7 @@ define([], function algoModule() {
       sum: AlgoService.sum,
       bigSum: AlgoService.bigSum,
       diagonalDifference: AlgoService.diagonalDifference,
-      linkedList: AlgoService.linkedList
+      mergeSortedArray: AlgoService.mergeSortedArray
     };
   };
 });

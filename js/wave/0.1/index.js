@@ -57,10 +57,27 @@ define([
         var waveActions = {
           init: function initWave() {
             ctrl.initWaveService(params, attrs.audio, controls);
+            waveActions.createControls(controls);
+          },
+          createControls: function createControls(controls) {
+            var ctrls = controls;
+           
+            ctrl.passWaveServiceToCallBack(function createCtrls(waveService){
+              var bdy = document.getElementsByTagName('body');
+              var ctrlDiv = element[0].children[2];
+              //console.log('THE CONTROL DIV', element[0].children[2]);
+              console.log('THE CONTROL DIV', element.find('.controls').css('background', '#ff0000'));
+            
+              for (var i = 0; i < ctrls.elements.length; i++) {
+                var btn = document.createElement('button');
+                btn.innerHTML = controls.elements[i].text;
+                btn.addEventListener('click', waveService[ctrls.elements[i].action], true);
+                ctrlDiv.appendChild(btn);
+                //element.find('.controls').append(btn);
+              }
+            });
           }
-        };    
-        console.log('WAVE DIRECTIVE ATTRIBUTES',attrs.audio);    
-        
+        };        
         waveActions.init();
         
         scope.$on('$destroy', function destroyed () {
@@ -87,6 +104,14 @@ define([
       
       this.initWaveService = function initWaveService(params, audioPath, controls) {
         waveService.init(params, audioPath, controls);
+      };
+      
+      this.passWaveServiceToCallBack = function passWaveServiceToCallBack(callback) {
+        if (typeof callback !== 'function') {
+          return;
+        }else {
+          callback(waveService);
+        }
       };
       
   }]);
