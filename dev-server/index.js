@@ -30,7 +30,9 @@ module.exports.server = (function () {
           //app.use(vhost('member.localhost.cn', siteApp));
           mainApp.listen(portX);
           
-          mainApp = liverelaod.createServer();
+          mainApp = liverelaod.createServer({
+            port: 35730 //Kill this config object if you do not need to specify the port
+          });
           mainApp.watch([path.resolve(__dirname + "/../js"), path.resolve(__dirname + "/../states"), path.resolve(__dirname + "/../webservicemocks")]);
           console.log("Server is listening on port:", port);
           

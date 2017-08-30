@@ -1,11 +1,11 @@
 require.config({
   paths: {
-    'html': './js/contact-list/0.1/index.html',
-    'css': './js/contact-list/0.1/index.css'
+    'contact-html': './js/contact-list/0.1/index.html',
+    'contact-css': './js/contact-list/0.1/index.css'
   }
 });
 
-define(['app', 'text!html', 'text!css'], function contactListComponent(app, html, css) {
+define(['app', 'text!contact-html', 'text!contact-css', 'linked-list-service'], function contactListComponent(app, html, css) {
   'use strict';
   console.log('CONTACT LIST');
   app.registerDirective('contactList', function contactListDDO() {
@@ -23,11 +23,11 @@ define(['app', 'text!html', 'text!css'], function contactListComponent(app, html
     };
   });
   
-  app.registerController('contactListController', ['$scope', '$element', function contactListCtrl($scope, $element) {
+  app.registerController('contactListController', ['$scope', '$element', 'linkedListService', function contactListCtrl($scope, $element, linkedListService) {
     var _this = this;
     
     _this.add = function add(elm) {
-      console.log('CALLING THE ADD, METHOD');
+      console.log('CALLING THE ADD, METHOD', linkedListService);
     };
   }]);
 });

@@ -6,6 +6,6 @@ require.config({
 
 define (['app', 'index-impl'], function linkedListModule(app, indexImpl) {
   'use strict';
-  app.registerFactory('linkedList', [indexImpl]);
+  app.registerFactory('linkedListService', [indexImpl]);
   
 });
