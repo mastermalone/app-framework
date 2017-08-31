@@ -109,6 +109,41 @@ define([], function algoModule() {
         }).join('');
         
         console.log('MAPPED REVERSE: ', mappedReverse);
+      },
+      camelCase: function camelCase(str) {
+        var wordCount = 1;
+        str = str.split('');
+        
+        str.forEach(function countCase(item, idx, array) {
+          //console.log('THE STRING', item);
+          if (item === item.toUpperCase()) {
+            wordCount++;
+          }
+        });
+        
+        console.log('WORDCOUNT=', wordCount);
+      },
+      plusMinus: function plusMinus(n) {
+        console.log(n);
+        var positives = 0;
+        var negatives = 0;
+        var zeros = 0;
+        var positiveFraction = 0;
+        var negativeFraction = 0;
+        var zeroeFraction = 0;
+        
+        n.forEach(function plusMinusItteration(item, idx, array) {
+          positives = item > 0 ? positives+=1 : positives; 
+          negatives = item < 0 ? negatives+=1 : negatives; 
+          zeros = item === 0 ? zeros+=1 : zeros; 
+          
+        });
+        
+        positiveFraction = (positives/n.length);
+        negativeFraction = (negatives/n.length);
+        zeroeFraction = (zeros/n.length);
+        
+        console.log(positiveFraction, negativeFraction, zeroeFraction);
       }
     };
     
@@ -120,7 +155,9 @@ define([], function algoModule() {
       bigSum: AlgoService.bigSum,
       diagonalDifference: AlgoService.diagonalDifference,
       mergeSortedArray: AlgoService.mergeSortedArray,
-      reverseString: AlgoService.reverseString
+      reverseString: AlgoService.reverseString,
+      camelCase: AlgoService.camelCase,
+      plusMinus: AlgoService.plusMinus
     };
   };
 });

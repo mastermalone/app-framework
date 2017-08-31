@@ -28,6 +28,8 @@ function jsAlgo(app, html, css) {
         ctrl.diagonalDifference(3);
         ctrl.mergeSortedArray([2,4,6,8,10], [1,3,5,7,9]);
         ctrl.reverseString('Hello Sir, can I help you?');
+        ctrl.camelCase('saveChangesInTheEditor');
+        ctrl.plusMinus([-4, 3, -9, 0, 4, 1]);
       }
     };
   }]);
@@ -63,6 +65,14 @@ function jsAlgo(app, html, css) {
     
     _this.reverseString = function reverseString(str) {
       algoService.reverseString(str);
+    };
+    
+    _this.camelCase = function camelCase(str) {
+      algoService.camelCase(str);
+    };
+    
+    _this.plusMinus = function plusMinus(n) {
+      algoService.plusMinus(n);
     };
     
   }]);
