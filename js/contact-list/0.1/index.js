@@ -18,7 +18,13 @@ define(['app', 'text!contact-html', 'text!contact-css', 'linked-list-service'], 
       bindToController: true,
       link: function clDDOLink(scope, element, attrs, ctrl) {
         //Set DOM actions here
-        ctrl.add();
+        var linkedList = ctrl.linkedList();
+        var Mike = linkedList.add({name: 'Mike', age: 43});
+        var Joe = linkedList.add({name: 'Joe', age: 53});
+        var Stan = linkedList.add({name: 'Stan', age: 63});
+        
+        linkedList.get(0);
+        console.log('DIRECTIVE LINKED LIST:',  linkedList);
       }
     };
   });
@@ -26,8 +32,8 @@ define(['app', 'text!contact-html', 'text!contact-css', 'linked-list-service'], 
   app.registerController('contactListController', ['$scope', '$element', 'linkedListService', function contactListCtrl($scope, $element, linkedListService) {
     var _this = this;
     
-    _this.add = function add(elm) {
-      console.log('CALLING THE ADD, METHOD', linkedListService);
+    _this.linkedList = function linkedList(elm) {
+      return new linkedListService();
     };
   }]);
 });
