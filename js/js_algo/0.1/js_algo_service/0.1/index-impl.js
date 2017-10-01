@@ -97,6 +97,7 @@ define([], function algoModule() {
       reverseString: function reverseString(str) {
         var reversed = '';
         var reversed2 = '';
+        var reversed3 = '';
         var mappedReverse = [];
         for (var i = str.length; i > 0; i--) {
           reversed += str[i-1];
@@ -108,10 +109,15 @@ define([], function algoModule() {
           return array[(array.length-1)-idx];
         }).join('');
         
+        reversed3 = str.split('');
+        reversed3.map(function reversIt(item, idx, array) {
+          return array[(array.length-1)-idx];
+        });
+        
         console.log('MAPPED REVERSE: ', mappedReverse);
       },
       camelCase: function camelCase(str) {
-        var wordCount = 1;
+        var wordCount = 0;
         str = str.split('');
         
         str.forEach(function countCase(item, idx, array) {
@@ -144,6 +150,23 @@ define([], function algoModule() {
         zeroeFraction = (zeros/n.length);
         
         console.log(positiveFraction, negativeFraction, zeroeFraction);
+      },
+      isPalendrome: function isPalendrome(str) {
+        if (typeof str !== 'string') {
+          return 'WTF?  Not a string';
+        }
+        var stringArray = str.split('');
+        var reversedStringContainer = [];
+        var testCase = null;
+        
+        testCase = stringArray.map(function checkString(item, idx, array) {
+          //return array[array[(array.length-1)-idx]];
+          return array[(array.length-1) -idx];
+        }).join('');
+        
+        str === testCase ? console.log('It is a palendrome:', str, testCase) : console.log('It is NOT a palendrome:', str, testCase);
+        
+        console.log('PALENDROME TEST', testCase);        
       }
     };
     
@@ -157,7 +180,8 @@ define([], function algoModule() {
       mergeSortedArray: AlgoService.mergeSortedArray,
       reverseString: AlgoService.reverseString,
       camelCase: AlgoService.camelCase,
-      plusMinus: AlgoService.plusMinus
+      plusMinus: AlgoService.plusMinus,
+      isPalendrome: AlgoService.isPalendrome
     };
   };
 });

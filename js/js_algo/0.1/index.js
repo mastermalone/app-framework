@@ -26,10 +26,11 @@ function jsAlgo(app, html, css) {
         ctrl.sum(6, [1, 2, 3, 4, 10, 11]);
         ctrl.bigSum(5, [1000000001, 1000000002, 1000000003, 1000000004, 1000000005]);
         ctrl.diagonalDifference(3);
-        ctrl.mergeSortedArray([2,4,6,8,10], [1,3,5,7,9]);
+        ctrl.mergeSortedArray([2,4,6,8,10,12,14,16], [1,3,5,7,9,11,13,15]);
         ctrl.reverseString('Hello Sir, can I help you?');
         ctrl.camelCase('saveChangesInTheEditor');
         ctrl.plusMinus([-4, 3, -9, 0, 4, 1]);
+        ctrl.isPalendrome('cat');
       }
     };
   }]);
@@ -75,5 +76,8 @@ function jsAlgo(app, html, css) {
       algoService.plusMinus(n);
     };
     
+    _this.isPalendrome = function plusMinus(str) {
+      algoService.isPalendrome(str);
+    };
   }]);
 });

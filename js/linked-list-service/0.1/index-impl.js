@@ -3,7 +3,7 @@ define(function linkedListImplementationModule() {
   
   return function LinkedListFactory() {
      
-     var Node = function Node(data) {
+     /*var Node = function Node(data) {
        this.data = data;
        this.next = null;
      };
@@ -84,7 +84,88 @@ define(function linkedListImplementationModule() {
          return this.head;
           
        }
-     };
-     return LinkedList;
+     };*/
+    
+    var Node = function Node(data) {
+      this.data = data;
+      this.next = null;
+    };
+    
+    var LinkedList = function LinkedList() {
+      this.head = null;
+      this.length = 0;
+    };
+    
+    LinkedList.prototype = {
+      constructor:LinkedList,
+      add: function add (data) {
+        var addedNode = new Node(data);
+        var currentNode = this.head;
+        
+        if(!currentNode){
+          this.head = addedNode;
+          this.length++;
+          return addedNode;
+        }
+        console.log('WHAT IS THE CURRENT NODE.NEXT?:', 'currentNode:', currentNode, 'currentNode.next:', currentNode.next);
+        while (currentNode.next) {
+          currentNode = currentNode.next;
+        }
+        
+        this.length++;
+        currentNode.next = addedNode;
+        return addedNode;
+      },
+      add2: function add2(data) {
+        var addedNode = new Node(data);
+        var currentNode = this.head; //Point to head, even is it's null
+        
+        if (!currentNode) {
+          currentNode = this.head; //This only happens once. Set the head of the list to the added node.
+          this.length++; //increase the length
+          return addedNode;
+        }
+        
+        //If the head exists or if more than one node are in the list
+        while (currentNode.next) {
+          currentNode = currentNode.next;
+        }
+        
+        currentNode.next = addedNode; //Set up the link by adding the addedNode as currentNode.next
+        this.length++;
+        return addedNode;
+      },
+      get: function getNode(index) {
+        var count = 0; //Create a count to increase via itteration
+        var checkedNode = this.head; //Point to the head first
+        
+        if (index < 0 || index > this.length) {
+          return 'The number is not within the range of this linked list';
+        }
+        
+        while (count < index) {
+          checkedNode = checkedNode.next;
+          count++;
+        }
+        console.log('GOT THIS NODE:', checkedNode);
+        return checkedNode;
+      },
+      get2: function get2 (index) {
+        var count = 0;
+        var checkedNode = this.head;
+        
+        if (index < 0 || index > this.length) {
+          return;
+        }
+        
+        while (count < index) {
+          checkedNode = checkedNode.next;
+          count++;
+        }
+        console.log('FROM GET2 GOT THIS NODE:', checkedNode);
+        return checkedNode;
+      }
+    };
+    return LinkedList;
   };
 });

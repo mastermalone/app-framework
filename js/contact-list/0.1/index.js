@@ -23,7 +23,7 @@ define(['app', 'text!contact-html', 'text!contact-css', 'linked-list-service'], 
         var Joe = linkedList.add({name: 'Joe', age: 53});
         var Stan = linkedList.add({name: 'Stan', age: 63});
         
-        linkedList.get(0);
+        linkedList.get2(1);
         console.log('DIRECTIVE LINKED LIST:',  linkedList);
       }
     };
