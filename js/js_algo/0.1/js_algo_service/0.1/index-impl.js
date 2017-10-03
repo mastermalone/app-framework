@@ -3,6 +3,7 @@ define([], function algoModule() {
   
   return function AlgoFactory() {
     var AlgoService = {
+      mergedArrayResult: [],
       init: function init() {
         console.log('INITIALIZING ALGO SERVICE');
       },
@@ -167,6 +168,101 @@ define([], function algoModule() {
         str === testCase ? console.log('It is a palendrome:', str, testCase) : console.log('It is NOT a palendrome:', str, testCase);
         
         console.log('PALENDROME TEST', testCase);        
+      },
+      realMergeSort: function realMergeSort(list) {
+        
+        //Return if the array is less than 2 or if it is not an array
+        if (typeof list !== 'object' || list.length < 2) {
+          return list;
+        }
+        
+        //Define a middle of the array and create two arrays from it
+        var arrayMid = Math.floor(list.length/2);
+        var leftSide = list.slice(0, arrayMid);
+        var rightSide = list.slice(arrayMid, list.length);
+        
+        console.log('LEFT SIDE', leftSide, 'RIGHT SIDE', rightSide);
+        //recursively call thjis this function as parameters of the merge function
+        return AlgoService.merge(AlgoService.realMergeSort(leftSide), AlgoService.realMergeSort(rightSide));
+        
+      },
+      merge: function merge(left, right) {
+        var mergedArray = [];
+        
+        //Array.prototype.shift removes the first element of an array
+        //and returns it as a value.  The array 0 index with then 
+        //become what index 1 was 
+        //In the case below, left.shift() represents 2
+        while (left.length && right.length) {
+          if (left[0] <= right[0]) {
+            mergedArray.push(left.shift());
+            console.log('LEFT SHIFT', mergedArray);
+          }else {
+            mergedArray.push(right.shift());
+            console.log('RIGHT SHIFT', mergedArray);
+          }
+        }
+        //Perform this if anything is left in the arrays.
+        //These will only get called once and only one of them will fire
+        while (left.length) {
+          mergedArray.push(left.shift());
+          console.log('LEFT SHIFT BELOW', mergedArray);
+        }
+        
+        while (right.length) {
+           mergedArray.push(right.shift());
+           console.log('RIGHT SHIFT BELOW', mergedArray);
+        }
+        console.log('MERGED RESULT:', mergedArray);
+        return mergedArray;
+      },
+      mergedSortArray3: function mergedSortArray3(list) {
+        //Return if the array is less than 2 or not an object
+        if (list.length <= 1) {
+          return list;
+        }
+        //Define a middle of the array
+        var midPoint = Math.floor(list.length/2);
+        
+        //Create two arrays recursively
+        var left = AlgoService.mergedSortArray3(list.slice(0, midPoint));
+        var right = AlgoService.mergedSortArray3(list.slice(midPoint));
+        
+        console.log('LEFT:', left, 'RIGHT:', right);
+        
+        //Create an array that will hold the merged results
+        var mergedResult = [];
+        
+        //Create indexes that we can use to iterate through the arrays
+        var idx_left = 0;
+        var idx_right = 0;
+        
+        //Iterate while the indexes are less than the length of the array
+        while (idx_left < left.length && idx_right < right.length) {
+          if (left[idx_left] <= right[idx_right]) {
+            mergedResult.push(left[idx_left]);
+            idx_left +=1;
+          }else {
+            mergedResult.push(right[idx_right]);
+            idx_right += 1;
+          }
+        }
+        
+        //Push the remaining indexes into the merged array after we are finsihed
+        //with the itteration
+        while (idx_left < left.length) {
+          mergedResult.push(left[idx_left]);
+          idx_left += 1;
+        }
+        
+        while (idx_right < right.length) {
+          mergedResult.push(right[idx_right]);
+          idx_right += 1;
+        }
+        
+        // return the result
+        console.log('THE MERGED 3 RESULT: ', mergedResult);
+        return mergedResult;
       }
     };
     
@@ -181,7 +277,9 @@ define([], function algoModule() {
       reverseString: AlgoService.reverseString,
       camelCase: AlgoService.camelCase,
       plusMinus: AlgoService.plusMinus,
-      isPalendrome: AlgoService.isPalendrome
+      isPalendrome: AlgoService.isPalendrome,
+      realMergeSort: AlgoService.realMergeSort,
+      mergedSortArray3: AlgoService.mergedSortArray3,
     };
   };
 });

@@ -21,6 +21,8 @@ function jsAlgo(app, html, css) {
       link: function jsAlgoLink(scope, element, attrs, ctrl) {
         console.log('THE JS_ALGO');
         var testArray = ['Mike', 'Tim', 'Erin', 'Elijah', 'Mike', 'Erin', 'Sheila', 'Elijah'];
+        var numberArray = [2,3,4,6,7,6,8,9,4,5,0,3,6];
+        
         ctrl.findDuplicates(testArray);
         ctrl.pointsComparison(5, 6, 7, 3, 6, 10);
         ctrl.sum(6, [1, 2, 3, 4, 10, 11]);
@@ -31,6 +33,8 @@ function jsAlgo(app, html, css) {
         ctrl.camelCase('saveChangesInTheEditor');
         ctrl.plusMinus([-4, 3, -9, 0, 4, 1]);
         ctrl.isPalendrome('cat');
+        //ctrl.realMergeSort(numberArray);
+        ctrl.mergedSortArray3(numberArray);
       }
     };
   }]);
@@ -78,6 +82,14 @@ function jsAlgo(app, html, css) {
     
     _this.isPalendrome = function plusMinus(str) {
       algoService.isPalendrome(str);
+    };
+    
+    _this.realMergeSort = function realMergeSort(list) {
+      algoService.realMergeSort(list);
+    };
+    
+    _this.mergedSortArray3 = function mergedSortArray3(list) {
+      algoService.mergedSortArray3(list);
     };
   }]);
 });
