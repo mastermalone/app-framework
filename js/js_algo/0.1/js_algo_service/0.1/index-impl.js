@@ -263,6 +263,128 @@ define([], function algoModule() {
         // return the result
         console.log('THE MERGED 3 RESULT: ', mergedResult);
         return mergedResult;
+      },
+      mergeSort4: function mergeSort4(list) {
+      	if (typeof list !== 'object' || list.length <= 1) {
+      		return list;
+      	}
+      	
+      	//define a mid point to split the array
+      	var midPoint = Math.floor(list.length/2);
+      	
+      	//Recursively create the two arrays
+      	var left = AlgoService.mergeSort4(list.slice(0, midPoint));
+      	var right = AlgoService.mergeSort4(list.slice(midPoint));
+      	
+      	//Create an array that will hold the merged results
+      	var merged = [];
+      	
+      	//Create some iteration variables
+      	var leftIdx = 0;
+      	var rightIdx = 0;
+      	
+      	//Iterate obly if both array lengths are less than their idx's
+      	while (leftIdx < left.length && rightIdx < right.length) {
+      		if (left[leftIdx] <= right[rightIdx]) {
+      			merged.push(left[leftIdx]);
+      			leftIdx += 1;
+      		} else {
+      			merged.push(right[rightIdx]);
+      			rightIdx += 1;
+      		}
+      	}
+      	
+      	//Push the rest of the remaining items into merged
+      	while (leftIdx < left.length) {
+      		merged.push(left[leftIdx]);
+      		leftIdx += 1;
+      	}
+      	
+      	while (rightIdx < right.length) {
+      		merged.push(right[rightIdx]);
+      		rightIdx += 1;
+      	}
+      	
+      	console.log('MERGE SORT 4', merged);
+      	return merged;
+      },
+      bubbleSort: function bubbleSort(list) {
+      	if (typeof list !== 'object') {
+      		return;
+      	}
+      	
+      	do {
+      		var swapped = false;//Set this to stop the loop
+      		list.forEach(function getBubbleSorted(num, idx, array) {
+      			if (array[idx] > array[idx+1]) {
+      				console.log(array[idx], 'is greater than', array[idx+1]);
+      				var temp = num;//Hold on to the value of the current index
+      				array[idx] = array[idx+1];
+      				array[idx+1] = temp;
+      				swapped = true;
+      				console.log('BUBBLE SORT', array);
+      			}
+      		});
+      	} while (swapped === true);
+      },
+      quickSort: function quickSort(list) {
+      	if (typeof list !== 'object' || list.length <=1) {
+      		return list;
+      	}
+      	
+      	//Set up some containers
+      	var pivot = Math.floor(list.length/2);
+      	var pivotValue = list[pivot];
+      	var match = [];
+      	var left = [];
+      	var right = [];
+      	      	
+      	list.forEach(function eachItem(item, idx) {
+      		if (list[idx] === pivotValue) {
+      			match.push(list[idx]);
+      		} else if (list[idx] < pivotValue) {
+      			left.push(list[idx]);
+      		} else {
+      			right.push(list[idx]);
+      		}
+      	});
+      	
+      	return AlgoService.quickSort(left).concat(match, AlgoService.quickSort(right));
+      },
+      quickSort2: function quckSort2(list) {
+      	if (typeof list !== 'object' || list.length <= 1) {
+      		return list;
+      	}
+      	
+      	var pivot = Math.floor(list.length/2);
+      	var pivotValue = list[pivot];
+      	var left = [];
+      	var right = [];
+      	var match = [];
+      	
+      	for (var i = 0; i < list.length; i++) {
+      		if (list[0] === pivotValue) {
+      			match.push(list[i]);
+      		} else if (list[i] < pivotValue) {
+      			left.push(list[i]);
+      		} else {
+      			right.push(list[i]);
+      		}
+      	}
+      	console.log('QUICK SORT LEFT', left);
+      	console.log('QUICK SORT MATCH', match);
+      	console.log('QUICK SORT RIGHT', right);
+      	return AlgoService.quickSort2(left).concat(match, AlgoService.quickSort2(right));
+      },
+      sumRecursion: function sumRecursion(list) {
+      	var first = list[0];
+      	
+      	if (list.length === 2) {
+      		return first + list[1];
+      	}
+      	console.log('adding', first, '+', list[1], '=', first+list[1]);
+      	console.log('WHAT IS sum.appl(null, args.slice(1))?:', list[1]);
+      	return first + AlgoService.sumRecursion(list.slice(1));
       }
     };
     
@@ -280,6 +402,11 @@ define([], function algoModule() {
       isPalendrome: AlgoService.isPalendrome,
       realMergeSort: AlgoService.realMergeSort,
       mergedSortArray3: AlgoService.mergedSortArray3,
+      mergeSort4: AlgoService.mergeSort4,
+      bubbleSort: AlgoService.bubbleSort,
+      quickSort: AlgoService.quickSort,	
+      quickSort2: AlgoService.quickSort2,	
+      sumRecursion: AlgoService.sumRecursion	
     };
   };
 });
