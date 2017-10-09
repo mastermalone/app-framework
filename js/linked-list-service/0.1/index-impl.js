@@ -61,7 +61,7 @@ define(function linkedListImplementationModule() {
          var previousNode = null;
          
          //FIrst check that the number entered is not higher than the number of nodes
-         if (num > this._length || num < 0) {
+         if (num > this.length || num < 0) {
            return "THAT NODE DOES NOT EXIST";
          }
          
