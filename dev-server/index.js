@@ -31,7 +31,7 @@ module.exports.server = (function () {
           mainApp.listen(portX);
           
           mainApp = liverelaod.createServer({
-            port: 35730 //Kill this config object if you do not need to specify the port
+            port: 35730 //Kill this config object if you do not need to specify the port 35729 is the normal port.  Used a different number to avert LR port conflicts
           });
           mainApp.watch([path.resolve(__dirname + "/../js"), path.resolve(__dirname + "/../states"), path.resolve(__dirname + "/../webservicemocks")]);
           console.log("Server is listening on port:", port);
