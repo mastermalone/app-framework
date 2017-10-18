@@ -53,7 +53,7 @@ require([
   'serivice-worker-service',
   'text',
   'app-init',
-  'slide-table-service',
+  /*'slide-table-service',*/
   'emitter',
   'event-service',
   'http-service',

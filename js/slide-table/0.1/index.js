@@ -11,7 +11,7 @@ define([
   'text!slide-css',
   'emitter',
   'event-service',
-  'slide-table-service',
+  /*'slide-table-service',*/
   'css-transition-service'
   ],
   function (app, slidehtml, slidecss, emitter) {

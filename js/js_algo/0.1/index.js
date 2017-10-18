@@ -21,15 +21,26 @@ function jsAlgo(app, html, css) {
       link: function jsAlgoLink(scope, element, attrs, ctrl) {
         console.log('THE JS_ALGO');
         var testArray = ['Mike', 'Tim', 'Erin', 'Elijah', 'Mike', 'Erin', 'Sheila', 'Elijah'];
-        ctrl.findDuplicates(testArray);
-        ctrl.pointsComparison(5, 6, 7, 3, 6, 10);
-        ctrl.sum(6, [1, 2, 3, 4, 10, 11]);
-        ctrl.bigSum(5, [1000000001, 1000000002, 1000000003, 1000000004, 1000000005]);
-        ctrl.diagonalDifference(3);
-        ctrl.mergeSortedArray([2,4,6,8,10], [1,3,5,7,9]);
-        ctrl.reverseString('Hello Sir, can I help you?');
-        ctrl.camelCase('saveChangesInTheEditor');
-        ctrl.plusMinus([-4, 3, -9, 0, 4, 1]);
+        var numberArray = [2,3,4,6,7,6,8,9,4,5,0,3,6];
+        var sumArray = [1,2,3,4,5,6,7,8];
+        //ctrl.findDuplicates(testArray);
+        //ctrl.pointsComparison(5, 6, 7, 3, 6, 10);
+        //ctrl.sum(6, [1, 2, 3, 4, 10, 11]);
+        //ctrl.bigSum(5, [1000000001, 1000000002, 1000000003, 1000000004, 1000000005]);
+        //ctrl.diagonalDifference(3);
+        //ctrl.mergeSortedArray([2,4,6,8,10,12,14,16], [1,3,5,7,9,11,13,15]);
+        //ctrl.reverseString('Hello Sir, can I help you?');
+        //ctrl.camelCase('saveChangesInTheEditor');
+        //ctrl.plusMinus([-4, 3, -9, 0, 4, 1]);
+        //ctrl.isPalendrome('cat');
+        //ctrl.realMergeSort(numberArray);
+        //ctrl.mergedSortArray3(numberArray);
+        //ctrl.mergeSort4(numberArray);
+        //ctrl.bubbleSort(numberArray);
+        //ctrl.quickSort(numberArray);
+        //ctrl.quickSort2(numberArray);
+        //ctrl.sumRecursion(sumArray);
+        ctrl.recursionExample(10);
       }
     };
   }]);
@@ -75,5 +86,41 @@ function jsAlgo(app, html, css) {
       algoService.plusMinus(n);
     };
     
+    _this.isPalendrome = function plusMinus(str) {
+      algoService.isPalendrome(str);
+    };
+    
+    _this.realMergeSort = function realMergeSort(list) {
+      algoService.realMergeSort(list);
+    };
+    
+    this.mergedSortArray3 = function mergedSortArray3(list) {
+      algoService.mergedSortArray3(list);
+    };
+    
+    this.mergeSort4 = function mergeSort4(list) {
+      algoService.mergeSort4(list);
+    };
+
+    
+    this.bubbleSort = function bubbleSort(list) {
+      algoService.bubbleSort(list);
+    };
+    
+    this.quickSort = function quickSort(list) {
+      console.log('QUICK SORT ORIGINAL', algoService.quickSort(list));
+    };
+    
+    this.quickSort2 = function quickSort2(list) {
+      console.log('QUICK SORT FINAL:',algoService.quickSort2(list));
+    };
+    
+    this.sumRecursion = function sumRecursion(list) {
+    	console.log('THE SUM', algoService.sumRecursion(list));
+    };
+    
+    this.recursionExample = function recursionExample(num) {
+    	algoService.recursionExample(num);
+    };
   }]);
 });
