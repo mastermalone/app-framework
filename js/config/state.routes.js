@@ -39,6 +39,12 @@ define(function () {
         url: '/js_algo',
         templateUrl: 'states/js_algo/index.html',
         controller: 'jsAlgoController'
+      },
+      {
+        name: 'sound_wave',
+        url: '/sound_wave',
+        templateUrl: 'states/sound_wave/index.html',
+        controller: 'swController'
       }
     ]
   };

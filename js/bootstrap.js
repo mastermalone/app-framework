@@ -17,7 +17,10 @@ require.config({
         'js-algo': './js/js_algo/0.1/index',
         'js-algo-service': './js/js_algo/0.1/js_algo_service/0.1/index',
         'linked-list-service': './js/linked-list-service/0.1/index',
-        'contact-list': './js/contact-list/0.1/index'
+        'peaks': './node_modules/peaks.js/peaks',
+        'contact-list': './js/contact-list/0.1/index',
+        'sound-wave': './js/sound_wave/0.1/index',
+        'sound-wave-service': './js/sound_wave/0.1/sound_wave_service/0.1/index'
     },
     shim: {
       'wavesurfer': {
@@ -48,4 +51,7 @@ require([
   'js-algo',
   'js-algo-service',
   'linked-list-service', 
-  'contact-list']);
+  'contact-list',
+  'peaks',
+  'sound-wave',
+  'sound-wave-service']);
