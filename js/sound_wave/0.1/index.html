@@ -2,3 +2,8 @@
 
 <div id="peaks-container"></div>
 <audio id="test_audio"></audio>
+<!--<img id="loading" src="../../../images/loading.gif" ng-show"{{swCtrl.waveLoaded}}" />-->
+<input type="button" value="Add Highlight" ng-click="swCtrl.swService.addHighlight()"/>
+<input type="button" value="Delete Highlight" ng-click="swCtrl.swService.deletHighlight()"/>
+<input type="button" value="Zoom In" ng-click="swCtrl.swService.zoomIn()"/>
+<input type="button" value="Zoom Out" ng-click="swCtrl.swService.zoomOut()"/>

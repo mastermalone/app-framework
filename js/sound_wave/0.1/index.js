@@ -16,25 +16,32 @@ define(['app', 'text!sw-html', 'text!sw-css', 'sound-wave-service'], function so
   function swControllerImpl($scope, $element, $compile, soundWaveService) {
     var _this = this;
     _this.title = 'Sound Wave using Peaks';
-    
-    _this.createWave = function createWave (elm, mediaElm, audioContext) {
-      soundWaveService.createWave(elm, mediaElm, audioContext);
-    };
+    _this.waveLoaded = false;
+    _this.swService = soundWaveService;
   }]);
   
   app.registerDirective('soundWave', [function soundWave() {
     return {
       restrict: 'E',
-      scope: {},
+      scope: {
+        source:'@'
+      },
       template: html,
       controller: 'swController',
       controllerAs: 'swCtrl',
       bindToController: true,
       link: function soundWaveDirective(scope, element, attrs, ctrl) {
-        var elm = document.querySelector('#peaks-container');
+        var containerElm = document.querySelector('#peaks-container');
         var mediaElm = document.querySelector('audio');
         var audioContext = new AudioContext();
-        ctrl.createWave(elm, mediaElm, audioContext);
+        
+        ctrl.swService.createWave({
+          container: containerElm, 
+          mediaElm: mediaElm, 
+          audioContext: audioContext,
+          source: ctrl.source,
+          waveLoaded:ctrl.waveLoaded
+        });
       }
     };
   }]);
