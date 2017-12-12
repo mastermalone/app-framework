@@ -1,9 +1,12 @@
 define(['peaks'], function soundWaveServiceModule(Peaks) {
   'use strict';
-  
+  console.log('THE PARENT', parent.window);
   return function SoundWaveFactory() {
     var SoundWaveService = {
       p: null,
+      duration: 0,
+      currentSegments: [],
+      config: null,
       //createWave: function createWave(elm, audio, context) {
       createWave: function createWave(config) {
         if (typeof config !== "object") {
@@ -12,6 +15,7 @@ define(['peaks'], function soundWaveServiceModule(Peaks) {
         }
         
         config.mediaElm.setAttribute('src', config.source);
+        SoundWaveService.config = config;
         
         SoundWaveService.p = Peaks.init({
           container: config.container,
@@ -20,31 +24,27 @@ define(['peaks'], function soundWaveServiceModule(Peaks) {
           zoomLevels: [512, 1024, 2048, 4096]
         });
         
+        //SoundWaveService.p.verboseMemoryLeak = true;
         SoundWaveService.p.on('peaks.ready', function() {
           // do something when the waveform is displayed and ready
           console.log('Audio duration', config.mediaElm.duration);
-          SoundWaveService.autoHighlight({
-            duration: config.mediaElm.duration,
-            peaksInstance: SoundWaveService.p
-          });
+          SoundWaveService.duration = config.mediaElm.duration;
+          SoundWaveService.autoHighlight();
           config.waveLoaded = true;
+          console.log('Creating the Wave!!', config.audioContext);
         });
-        console.log('Creating the Wave!!', config.audioContext);
-        
       },
-      autoHighlight: function autoHighlight(config) {
-        if (typeof config !== "object") {
-          return;
-        }
+      autoHighlight: function autoHighlight() {
         var highlightColor = ['#ff0000', '#1E5799'];
         var colorToggle = 0;
-        var duration = Math.floor(config.duration);
+        var duration = Math.floor(SoundWaveService.duration);
         var highlights = [];
         
         //Mock the highlight data
         for (var i = 0; i < duration; i++) {
           if (i > 0) {
-            config.peaksInstance.segments.add({
+            //config.peaksInstance.segments.add({
+            SoundWaveService.p.segments.add({
               startTime: (i-0.5),
               endTime: (i+0.5),
               editable: true,
@@ -58,11 +58,22 @@ define(['peaks'], function soundWaveServiceModule(Peaks) {
       },
       addHighlight: function addHighlight() {
         //add highlighs
-        console.log('Adding Highlight');
+        console.log('Adding Highlight', SoundWaveService.p.segments.getSegments());
+        
+        SoundWaveService.currentSegments = SoundWaveService.p.segments.getSegments().map(function getCurrentSegments(item, idx, attr) {
+          return item;
+        });
+        console.log('PEAKS INSTANCE:', SoundWaveService.p);
+        console.log('THE NEW SEGMENTS ARRAY:', SoundWaveService.currentSegments);
+        SoundWaveService.autoHighlight();
+        //SoundWaveService.createWave(SoundWaveService.config);//TODO test is not good.  Memory is still an issue
       },
       deletHighlight: function deletHighlight() {
         //Delete highlight
         console.log('Deleting Highlight');
+        
+        SoundWaveService.p.segments.removeAll();
+        //SoundWaveService.p.destroy();
       },
       zoomIn: function zoomIn() {
         //Zoom In
